@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="HydraPup Pro - The Ultimate Dog Health & Hydration Tracker">
-    <title>HydraPup Pro - Dog Health & Hydration Tracker</title>
+    <meta name="description" content="HydraPup PRO - The Ultimate Dog Health & Hydration Tracker">
+    <title>HydraPup PRO - Dog Health & Hydration Tracker</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap">
     <style>
@@ -17,7 +17,7 @@
             --danger: #d9534f;
             --light: #f8f9fa;
             --dark: #343a40;
-            --pro-gradient: linear-gradient(135deg, #8a2387 0%, #e94057 50%, #f27121 100%);
+            --gradient: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             --radius: 16px;
         }
@@ -80,19 +80,19 @@
         }
         
         .pro-badge {
-            background: var(--pro-gradient);
+            background: linear-gradient(90deg, #ff9800 0%, #ff5722 100%);
             color: white;
+            border-radius: 20px;
             padding: 8px 15px;
-            border-radius: 30px;
-            font-weight: 700;
             font-size: 16px;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
             margin-left: 10px;
-            vertical-align: middle;
-            display: inline-block;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
         }
         
-        .free-training-btn {
+        .training-btn {
             background: linear-gradient(90deg, #4CAF50 0%, #2E7D32 100%);
             color: white;
             border: none;
@@ -106,32 +106,12 @@
             align-items: center;
             gap: 15px;
             box-shadow: 0 6px 15px rgba(46, 125, 50, 0.4);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            position: relative;
-            overflow: hidden;
             text-decoration: none;
         }
         
-        .free-training-btn:hover {
+        .training-btn:hover {
             transform: scale(1.05);
             box-shadow: 0 8px 20px rgba(46, 125, 50, 0.6);
-        }
-        
-        .free-training-btn::after {
-            content: "";
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: rgba(255, 255, 255, 0.2);
-            transform: rotate(30deg);
-            transition: all 0.6s;
-        }
-        
-        .free-training-btn:hover::after {
-            transform: rotate(30deg) translate(20%, 20%);
         }
         
         /* Main Calculator Section */
@@ -149,7 +129,7 @@
         }
         
         .calculator-header {
-            background: var(--pro-gradient);
+            background: var(--gradient);
             color: white;
             padding: 30px;
             text-align: center;
@@ -218,7 +198,7 @@
         }
         
         .calculate-btn {
-            background: var(--pro-gradient);
+            background: var(--gradient);
             color: white;
             border: none;
             border-radius: 12px;
@@ -233,12 +213,12 @@
             justify-content: center;
             gap: 15px;
             margin-bottom: 20px;
-            box-shadow: 0 6px 15px rgba(138, 35, 135, 0.4);
+            box-shadow: 0 6px 15px rgba(75, 134, 180, 0.4);
         }
         
         .calculate-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(138, 35, 135, 0.5);
+            box-shadow: 0 8px 20px rgba(75, 134, 180, 0.5);
         }
         
         .calculate-btn:active {
@@ -307,8 +287,35 @@
             color: var(--success);
         }
         
-        /* Pro Features Section */
-        .pro-features {
+        /* Training Offer */
+        .training-offer {
+            background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            margin: 25px 0 15px;
+            font-size: 18px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .training-offer i {
+            position: absolute;
+            font-size: 80px;
+            opacity: 0.2;
+            right: 10px;
+            top: 10px;
+        }
+        
+        .training-offer strong {
+            font-size: 20px;
+            display: block;
+            margin-top: 5px;
+        }
+        
+        /* Features Section */
+        .features {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 25px;
@@ -324,16 +331,12 @@
             position: relative;
             overflow: hidden;
             transition: all 0.3s;
-            border: 2px solid #e0e0e0;
+            border: 2px solid var(--primary);
         }
         
-        .feature-card.pro-unlocked {
-            border: 2px solid #8a2387;
-            box-shadow: 0 8px 25px rgba(138, 35, 135, 0.2);
-        }
-        
-        .feature-card.pro-unlocked .feature-icon {
-            background: rgba(138, 35, 135, 0.1);
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
         }
         
         .feature-icon {
@@ -362,22 +365,6 @@
             margin-bottom: 20px;
         }
         
-        .feature-cta {
-            background: var(--primary);
-            color: white;
-            padding: 12px 20px;
-            border-radius: 8px;
-            font-weight: 600;
-            display: inline-block;
-            transition: all 0.3s;
-            text-decoration: none;
-        }
-        
-        .feature-cta:hover {
-            background: var(--secondary);
-            transform: translateY(-3px);
-        }
-        
         /* App Install Section */
         .install-section {
             background: white;
@@ -397,7 +384,7 @@
             left: 0;
             width: 100%;
             height: 8px;
-            background: var(--pro-gradient);
+            background: var(--gradient);
         }
         
         .install-section h3 {
@@ -503,37 +490,6 @@
             box-shadow: 0 6px 20px rgba(0,0,0,0.25);
         }
         
-        /* Training Banner */
-        .training-banner {
-            background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%);
-            color: white;
-            padding: 25px;
-            border-radius: 15px;
-            text-align: center;
-            margin: 30px 0;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .training-banner i {
-            position: absolute;
-            font-size: 100px;
-            opacity: 0.1;
-            right: 20px;
-            top: 10px;
-        }
-        
-        .training-banner h3 {
-            font-size: 28px;
-            margin-bottom: 15px;
-        }
-        
-        .training-banner p {
-            font-size: 18px;
-            max-width: 700px;
-            margin: 0 auto 20px;
-        }
-        
         /* Responsive Design */
         @media (max-width: 768px) {
             .logo h1 {
@@ -544,7 +500,7 @@
                 font-size: 26px;
             }
             
-            .install-buttons, .pro-features {
+            .install-buttons, .features {
                 flex-direction: column;
                 align-items: center;
             }
@@ -553,15 +509,20 @@
                 padding: 25px;
             }
             
-            .install-btn, .free-training-btn {
+            .install-btn, .training-btn {
                 padding: 16px 20px;
                 font-size: 18px;
-                width: 100%;
-                text-align: center;
             }
             
             .feature-card {
                 margin-bottom: 20px;
+            }
+            
+            .training-btn {
+                margin-top: 15px;
+                width: 100%;
+                text-align: center;
+                justify-content: center;
             }
         }
     </style>
@@ -575,9 +536,9 @@
         <header>
             <div class="logo">
                 <i class="fas fa-paw"></i>
-                <h1>HydraPup <span class="pro-badge">PRO</span></h1>
+                <h1>HydraPup <span class="pro-badge">PRO <i class="fas fa-crown"></i></span></h1>
             </div>
-            <a href="https://tinyurl.com/DOG-TOOL-DEMOFree" class="free-training-btn" target="_blank">
+            <a href="https://tinyurl.com/dogtrainingfreee" target="_blank" class="training-btn">
                 <i class="fas fa-graduation-cap"></i> FREE Training
             </a>
         </header>
@@ -586,7 +547,7 @@
             <section class="calculator-card">
                 <div class="calculator-header">
                     <h2><i class="fas fa-calculator"></i> Dog Hydration & Health Tracker</h2>
-                    <p>Instantly calculate your dog's daily water needs - all PRO features unlocked!</p>
+                    <p>PRO Version - All features unlocked! Track your dog's complete health profile</p>
                 </div>
                 
                 <div class="calculator-content">
@@ -627,93 +588,73 @@
                         </div>
                         <div class="risk-label risk-medium">Moderate Risk</div>
                         
-                        <div class="training-banner">
+                        <div class="training-offer">
                             <i class="fas fa-user-graduate"></i>
-                            <h3>FREE Professional Dog Training!</h3>
-                            <p>As a HydraPup Pro user, you get exclusive access to our premium training videos</p>
-                            <a href="https://tinyurl.com/DOG-TOOL-DEMOFree" class="free-training-btn" target="_blank">
-                                <i class="fas fa-graduation-cap"></i> Access FREE Training Now
-                            </a>
+                            <p>As a PRO user, you get exclusive access to our</p>
+                            <strong>FREE Dog Training Video Course!</strong>
+                            <a href="https://tinyurl.com/dogtrainingfreee" target="_blank" style="color: white; text-decoration: underline; display: block; margin-top: 10px;">Click here to access now</a>
                         </div>
                     </div>
                 </div>
             </section>
             
-            <section class="pro-features">
-                <div class="feature-card pro-unlocked">
+            <section class="features">
+                <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-pills"></i>
                     </div>
                     <h4>Medication Tracker</h4>
                     <p>Never miss a dose with smart medication reminders and tracking system</p>
-                    <a href="#" class="feature-cta">
-                        <i class="fas fa-play-circle"></i> Use Now
-                    </a>
                 </div>
                 
-                <div class="feature-card pro-unlocked">
+                <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-heartbeat"></i>
                     </div>
                     <h4>Health Symptom Checker</h4>
                     <p>Identify potential health issues based on symptoms and behaviors</p>
-                    <a href="#" class="feature-cta">
-                        <i class="fas fa-play-circle"></i> Use Now
-                    </a>
                 </div>
                 
-                <div class="feature-card pro-unlocked">
+                <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-ambulance"></i>
                     </div>
                     <h4>Emergency Vet Locator</h4>
                     <p>Find the nearest emergency vet with one tap in critical situations</p>
-                    <a href="#" class="feature-cta">
-                        <i class="fas fa-play-circle"></i> Use Now
-                    </a>
                 </div>
                 
-                <div class="feature-card pro-unlocked">
+                <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-syringe"></i>
                     </div>
                     <h4>Vaccination Tracker</h4>
                     <p>Track vaccination schedules and get reminders for boosters</p>
-                    <a href="#" class="feature-cta">
-                        <i class="fas fa-play-circle"></i> Use Now
-                    </a>
                 </div>
                 
-                <div class="feature-card pro-unlocked">
+                <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-utensils"></i>
                     </div>
                     <h4>Personalized Diet Plans</h4>
                     <p>Custom meal plans based on breed, age, and health conditions</p>
-                    <a href="#" class="feature-cta">
-                        <i class="fas fa-play-circle"></i> Use Now
-                    </a>
                 </div>
                 
-                <div class="feature-card pro-unlocked">
+                <div class="feature-card">
                     <div class="feature-icon">
-                        <i class="fas fa-stethoscope"></i>
+                        <i class="fas fa-book-medical"></i>
                     </div>
-                    <h4>Health History Tracker</h4>
-                    <p>Maintain comprehensive health records for your dog</p>
-                    <a href="#" class="feature-cta">
-                        <i class="fas fa-play-circle"></i> Use Now
-                    </a>
+                    <h4>Health History Log</h4>
+                    <p>Maintain complete medical records and track health progress</p>
                 </div>
             </section>
             
             <section class="install-section">
                 <h3><i class="fas fa-mobile-alt"></i> Get Full Health Protection on Your Phone!</h3>
-                <p>Install HydraPup Pro on your device for real-time health monitoring and alerts</p>
+                <p>Install HydraPup PRO on your device for real-time health monitoring and alerts</p>
                 
                 <div class="install-buttons">
                     <button class="install-btn" id="installPWA">
-                        <i class="fas fa-download"></i> Install Pro App
+                        <i class="fas fa-download"></i> Install PRO App
                     </button>
                 </div>
                 
@@ -724,7 +665,7 @@
         </main>
         
         <footer>
-            <p>© 2023 HydraPup Pro - Dog Health & Hydration Tracker. All rights reserved.</p>
+            <p>© 2023 HydraPup PRO - Ultimate Dog Health Tracker. All rights reserved.</p>
             <div class="footer-links">
                 <a href="#">Privacy Policy</a>
                 <a href="#">Terms of Service</a>
@@ -880,9 +821,6 @@
                     calculateBtn.click();
                 }, 500);
             }
-            
-            // Unlock all features (already unlocked in HTML, but for demonstration)
-            console.log("All PRO features are unlocked and fully functional!");
         });
     </script>
 </body>
