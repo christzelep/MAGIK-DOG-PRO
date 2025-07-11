@@ -1,55 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="el">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="HydraPup PRO - The Ultimate Dog Health & Hydration Tracker">
-    <title>HydraPup PRO - Dog Health & Hydration Tracker</title>
+    <title>Pro Pet Health Companion | Pro Edition</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap">
+    <link rel="manifest" href="/manifest.json">
     <style>
         :root {
-            --primary: #4b86b4;
-            --secondary: #63a4ff;
+            --primary: #4e54c8;
+            --secondary: #8f94fb;
             --accent: #ff6b6b;
-            --success: #5cb85c;
-            --warning: #f0ad4e;
-            --danger: #d9534f;
             --light: #f8f9fa;
             --dark: #343a40;
-            --gradient: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            --radius: 16px;
+            --success: #28a745;
+            --warning: #ffc107;
+            --info: #17a2b8;
+            --radius: 12px;
+            --shadow: 0 4px 20px rgba(0,0,0,0.08);
         }
         
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         body {
-            font-family: 'Open Sans', sans-serif;
-            background: linear-gradient(135deg, #e0f7fa 0%, #bbdefb 100%);
-            min-height: 100vh;
-            padding: 20px;
-            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e7f1 100%);
+            color: var(--dark);
             line-height: 1.6;
+            min-height: 100vh;
+            padding-bottom: 60px;
         }
         
         .container {
             max-width: 1200px;
             margin: 0 auto;
+            padding: 0 20px;
         }
         
         /* Header Styles */
         header {
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 20px 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 0;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
         }
         
         .logo {
@@ -58,769 +64,994 @@
             gap: 15px;
         }
         
-        .logo h1 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 32px;
-            color: var(--primary);
-            font-weight: 700;
-            letter-spacing: -0.5px;
-        }
-        
-        .logo i {
-            font-size: 36px;
-            color: var(--primary);
-            background: white;
-            width: 60px;
-            height: 60px;
+        .logo img {
+            height: 50px;
+            width: 50px;
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: var(--shadow);
+            object-fit: cover;
+            border: 2px solid white;
         }
         
-        .pro-badge {
-            background: linear-gradient(90deg, #ff9800 0%, #ff5722 100%);
-            color: white;
-            border-radius: 20px;
-            padding: 8px 15px;
-            font-size: 16px;
+        .logo h1 {
+            font-size: 1.8rem;
             font-weight: 700;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
+        }
+        
+        .logo span {
+            background: var(--accent);
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-size: 0.8rem;
             margin-left: 10px;
         }
         
-        .training-btn {
-            background: linear-gradient(90deg, #4CAF50 0%, #2E7D32 100%);
-            color: white;
-            border: none;
-            border-radius: 50px;
-            padding: 18px 35px;
-            font-size: 20px;
-            font-weight: 800;
-            cursor: pointer;
-            transition: all 0.3s;
+        nav ul {
             display: flex;
-            align-items: center;
-            gap: 15px;
-            box-shadow: 0 6px 15px rgba(46, 125, 50, 0.4);
+            list-style: none;
+            gap: 25px;
+        }
+        
+        nav a {
+            color: white;
             text-decoration: none;
-        }
-        
-        .training-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 20px rgba(46, 125, 50, 0.6);
-        }
-        
-        /* Main Calculator Section */
-        .calculator-card {
-            background: white;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            overflow: hidden;
-            margin-bottom: 30px;
-            transition: transform 0.3s ease;
-        }
-        
-        .calculator-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .calculator-header {
-            background: var(--gradient);
-            color: white;
-            padding: 30px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .calculator-header::before {
-            content: "";
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
-            transform: rotate(30deg);
-        }
-        
-        .calculator-header h2 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 32px;
-            margin-bottom: 15px;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .calculator-header p {
-            font-size: 18px;
-            max-width: 600px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .calculator-content {
-            padding: 40px;
-        }
-        
-        .input-group {
-            margin-bottom: 30px;
-        }
-        
-        .input-group label {
-            display: block;
-            margin-bottom: 12px;
-            font-weight: 600;
-            font-size: 18px;
-            color: var(--dark);
-        }
-        
-        .input-group input, .input-group select {
-            width: 100%;
-            padding: 18px 20px;
-            border: 2px solid #e0e0e0;
-            border-radius: 12px;
-            font-size: 18px;
-            transition: all 0.3s;
-            background: #f9f9f9;
-        }
-        
-        .input-group input:focus, .input-group select:focus {
-            border-color: var(--primary);
-            outline: none;
-            background: white;
-            box-shadow: 0 0 0 4px rgba(75, 134, 180, 0.2);
-        }
-        
-        .calculate-btn {
-            background: var(--gradient);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            padding: 20px 30px;
-            font-size: 22px;
-            font-weight: 700;
-            cursor: pointer;
-            width: 100%;
-            transition: all 0.3s;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 20px;
-            box-shadow: 0 6px 15px rgba(75, 134, 180, 0.4);
+            gap: 8px;
         }
         
-        .calculate-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(75, 134, 180, 0.5);
+        nav a:hover {
+            color: #ffde7d;
+            transform: translateY(-2px);
         }
         
-        .calculate-btn:active {
-            transform: translateY(1px);
-        }
-        
-        /* Results Section */
-        .results-container {
-            display: none;
-            background: #f1f8ff;
-            border-radius: 15px;
-            padding: 30px;
-            margin-top: 30px;
-            border-left: 5px solid var(--primary);
-            animation: fadeIn 0.5s ease forwards;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .water-result {
-            font-size: 42px;
-            font-weight: 800;
-            color: var(--primary);
+        /* Hero Section */
+        .hero {
+            padding: 80px 0 50px;
             text-align: center;
-            margin: 20px 0;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        
-        .risk-meter {
-            height: 30px;
-            background: #e0e0e0;
-            border-radius: 15px;
-            margin: 30px 0;
-            overflow: hidden;
-            position: relative;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
-        }
-        
-        .risk-level {
-            height: 100%;
-            background: linear-gradient(90deg, var(--success) 0%, var(--warning) 50%, var(--danger) 100%);
-            border-radius: 15px;
-            transition: width 1s ease;
-        }
-        
-        .risk-label {
-            text-align: center;
-            font-weight: 700;
-            font-size: 20px;
-            color: var(--dark);
-            margin-top: 10px;
-        }
-        
-        .risk-high {
-            color: var(--danger);
-        }
-        
-        .risk-medium {
-            color: var(--warning);
-        }
-        
-        .risk-low {
-            color: var(--success);
-        }
-        
-        /* Training Offer */
-        .training-offer {
-            background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%);
+            background: url('https://images.unsplash.com/photo-1535930749574-1399327ce78f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
             color: white;
-            padding: 20px;
-            border-radius: 12px;
-            text-align: center;
-            margin: 25px 0 15px;
-            font-size: 18px;
             position: relative;
-            overflow: hidden;
         }
         
-        .training-offer i {
+        .hero::before {
+            content: '';
             position: absolute;
-            font-size: 80px;
-            opacity: 0.2;
-            right: 10px;
-            top: 10px;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(78, 84, 200, 0.85);
         }
         
-        .training-offer strong {
-            font-size: 20px;
-            display: block;
-            margin-top: 5px;
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h2 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .hero p {
+            font-size: 1.4rem;
+            margin-bottom: 30px;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+        }
+        
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--accent);
+            color: white;
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 15px rgba(255, 107, 107, 0.4);
+            border: none;
+            cursor: pointer;
+        }
+        
+        .cta-button:hover {
+            background: #ff5252;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.6);
         }
         
         /* Features Section */
         .features {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            font-size: 2.5rem;
+            color: var(--primary);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+        
+        .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin: 40px 0;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
         }
         
         .feature-card {
             background: white;
             border-radius: var(--radius);
-            padding: 25px;
-            box-shadow: var(--shadow);
-            text-align: center;
-            position: relative;
             overflow: hidden;
-            transition: all 0.3s;
-            border: 2px solid var(--primary);
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         
         .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            transform: translateY(-10px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.15);
         }
         
-        .feature-icon {
-            font-size: 48px;
+        .feature-img {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .feature-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .feature-card:hover .feature-img img {
+            transform: scale(1.05);
+        }
+        
+        .feature-content {
+            padding: 25px;
+        }
+        
+        .feature-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
             color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .feature-content p {
+            color: #666;
             margin-bottom: 20px;
-            background: rgba(75, 134, 180, 0.1);
-            width: 90px;
-            height: 90px;
+        }
+        
+        .feature-content .icon {
+            background: var(--secondary);
+            color: white;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 25px;
+            font-size: 1.2rem;
         }
         
-        .feature-card h4 {
-            font-size: 24px;
-            margin-bottom: 15px;
-            color: var(--primary);
+        /* Pricing Section */
+        .pricing {
+            background: linear-gradient(135deg, #eef2f5 0%, #d6e0f0 100%);
+            padding: 80px 0;
+            text-align: center;
         }
         
-        .feature-card p {
-            color: #666;
-            font-size: 17px;
-            margin-bottom: 20px;
+        .pricing-cards {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 50px;
         }
         
-        /* App Install Section */
-        .install-section {
+        .pricing-card {
             background: white;
             border-radius: var(--radius);
             padding: 40px 30px;
-            text-align: center;
+            width: 350px;
             box-shadow: var(--shadow);
-            margin: 50px 0;
             position: relative;
             overflow: hidden;
         }
         
-        .install-section::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 8px;
-            background: var(--gradient);
+        .pro-card {
+            border: 3px solid var(--primary);
+            transform: scale(1.05);
         }
         
-        .install-section h3 {
-            font-size: 32px;
-            color: var(--primary);
+        .pricing-card h3 {
+            font-size: 1.8rem;
             margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        .price {
+            font-size: 3rem;
             font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 25px;
         }
         
-        .install-section p {
-            font-size: 20px;
-            max-width: 700px;
-            margin: 0 auto 30px;
-            color: #555;
+        .price span {
+            font-size: 1.2rem;
+            color: #777;
         }
         
-        .install-buttons {
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+        
+        .pricing-features li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
             display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-            margin-top: 25px;
+            align-items: center;
+            gap: 10px;
         }
         
-        .install-btn {
-            background: var(--dark);
+        .pricing-features li i {
+            color: var(--success);
+        }
+        
+        .pro-badge {
+            position: absolute;
+            top: 20px;
+            right: -30px;
+            background: var(--accent);
             color: white;
-            border: none;
-            border-radius: 12px;
-            padding: 20px 35px;
-            font-size: 22px;
+            padding: 8px 40px;
+            transform: rotate(45deg);
             font-weight: 600;
-            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        
+        /* Free Training Section */
+        .training {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            text-align: center;
+        }
+        
+        .training-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .training h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .training p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .testimonial-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+        
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 5rem;
+            color: rgba(143, 148, 251, 0.2);
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+        
+        .testimonial-text {
+            margin-bottom: 20px;
+            font-style: italic;
+            color: #555;
+            padding-top: 30px;
+        }
+        
+        .testimonial-author {
             display: flex;
             align-items: center;
             gap: 15px;
-            transition: all 0.3s;
-            text-decoration: none;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
         
-        .install-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        .author-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+        
+        .author-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .author-info h4 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+        
+        .author-info p {
+            color: var(--primary);
+            font-weight: 500;
         }
         
         /* Footer */
         footer {
-            text-align: center;
-            padding: 40px 0;
-            color: #666;
-            font-size: 16px;
-            border-top: 1px solid #e0e0e0;
-            margin-top: 30px;
-            background: rgba(255, 255, 255, 0.7);
-            border-radius: var(--radius);
-        }
-        
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin: 20px 0;
-            flex-wrap: wrap;
-        }
-        
-        .footer-links a {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-        
-        .footer-links a:hover {
-            color: var(--secondary);
-        }
-        
-        /* PWA Install Button */
-        #installButton {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: var(--primary);
+            background: var(--dark);
             color: white;
-            border: none;
-            border-radius: 50px;
-            padding: 15px 25px;
-            font-size: 18px;
-            font-weight: 600;
-            cursor: pointer;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--accent);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 15px;
+        }
+        
+        .footer-column ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--accent);
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
             display: flex;
             align-items: center;
-            gap: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            z-index: 1000;
-            display: none;
-            transition: all 0.3s;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #444;
+            color: white;
+            transition: all 0.3s ease;
         }
         
-        #installButton:hover {
-            background: var(--secondary);
+        .social-links a:hover {
+            background: var(--primary);
             transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #444;
+            color: #999;
+            font-size: 0.9rem;
         }
         
         /* Responsive Design */
+        @media (max-width: 992px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+        }
+        
         @media (max-width: 768px) {
-            .logo h1 {
-                font-size: 26px;
-            }
-            
-            .calculator-header h2 {
-                font-size: 26px;
-            }
-            
-            .install-buttons, .features {
+            .pricing-cards {
                 flex-direction: column;
                 align-items: center;
             }
             
-            .calculator-content {
-                padding: 25px;
+            .pro-card {
+                transform: scale(1);
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero h2 {
+                font-size: 2rem;
             }
             
-            .install-btn, .training-btn {
-                padding: 16px 20px;
-                font-size: 18px;
+            .section-title {
+                font-size: 2rem;
             }
             
             .feature-card {
-                margin-bottom: 20px;
-            }
-            
-            .training-btn {
-                margin-top: 15px;
                 width: 100%;
-                text-align: center;
-                justify-content: center;
             }
+        }
+        
+        /* Notification */
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--success);
+            color: white;
+            padding: 15px 25px;
+            border-radius: var(--radius);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            z-index: 1000;
+            transform: translateX(150%);
+            transition: transform 0.5s ease;
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        .notification i {
+            font-size: 1.5rem;
+        }
+        
+        .notification-content h4 {
+            margin-bottom: 5px;
+        }
+        
+        /* Install Button */
+        .install-btn {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: var(--primary);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(78, 84, 200, 0.4);
+            z-index: 1000;
+            border: none;
+            transition: all 0.3s ease;
+        }
+        
+        .install-btn:hover {
+            background: #3d43b5;
+            transform: translateY(-3px);
+        }
+        
+        /* Demo UI Elements */
+        .demo-ui {
+            background: white;
+            border-radius: var(--radius);
+            padding: 20px;
+            margin-top: 30px;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        
+        .demo-element {
+            width: 200px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: var(--radius);
+            text-align: center;
+        }
+        
+        .demo-element h4 {
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background: #e9ecef;
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        
+        .progress {
+            height: 100%;
+            background: var(--success);
+            border-radius: 5px;
+        }
+        
+        .status {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        .status.upcoming {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .status.completed {
+            background: #d4edda;
+            color: #155724;
         }
     </style>
 </head>
 <body>
-    <button id="installButton">
+    <!-- Install Button -->
+    <button class="install-btn" id="installButton">
         <i class="fas fa-download"></i> Install App
     </button>
-
-    <div class="container">
-        <header>
-            <div class="logo">
-                <i class="fas fa-paw"></i>
-                <h1>HydraPup <span class="pro-badge">PRO <i class="fas fa-crown"></i></span></h1>
-            </div>
-            <a href="https://tinyurl.com/dogtrainingfreee" target="_blank" class="training-btn">
-                <i class="fas fa-graduation-cap"></i> FREE Training
-            </a>
-        </header>
-
-        <main>
-            <section class="calculator-card">
-                <div class="calculator-header">
-                    <h2><i class="fas fa-calculator"></i> Dog Hydration & Health Tracker</h2>
-                    <p>PRO Version - All features unlocked! Track your dog's complete health profile</p>
-                </div>
-                
-                <div class="calculator-content">
-                    <div class="input-group">
-                        <label for="dogWeight"><i class="fas fa-weight"></i> Dog's Weight (kg)</label>
-                        <input type="number" id="dogWeight" placeholder="Enter weight in kilograms" min="1">
-                    </div>
-                    
-                    <div class="input-group">
-                        <label for="activityLevel"><i class="fas fa-running"></i> Activity Level</label>
-                        <select id="activityLevel">
-                            <option value="low">Low (mostly indoors)</option>
-                            <option value="medium" selected>Medium (regular walks)</option>
-                            <option value="high">High (very active/athletic)</option>
-                        </select>
-                    </div>
-                    
-                    <div class="input-group">
-                        <label for="temperature"><i class="fas fa-thermometer-half"></i> Current Temperature</label>
-                        <select id="temperature">
-                            <option value="cool">Cool (&lt;20°C)</option>
-                            <option value="moderate" selected>Moderate (20-30°C)</option>
-                            <option value="hot">Hot (&gt;30°C)</option>
-                        </select>
-                    </div>
-                    
-                    <button class="calculate-btn">
-                        <i class="fas fa-bone"></i> Calculate Water Needs
-                    </button>
-                    
-                    <div class="results-container">
-                        <h3><i class="fas fa-tint"></i> Daily Water Requirements:</h3>
-                        <div class="water-result">1.5L</div>
-                        
-                        <h3><i class="fas fa-exclamation-triangle"></i> Dehydration Risk Level:</h3>
-                        <div class="risk-meter">
-                            <div class="risk-level" style="width: 30%;"></div>
-                        </div>
-                        <div class="risk-label risk-medium">Moderate Risk</div>
-                        
-                        <div class="training-offer">
-                            <i class="fas fa-user-graduate"></i>
-                            <p>As a PRO user, you get exclusive access to our</p>
-                            <strong>FREE Dog Training Video Course!</strong>
-                            <a href="https://tinyurl.com/dogtrainingfreee" target="_blank" style="color: white; text-decoration: underline; display: block; margin-top: 10px;">Click here to access now</a>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            
-            <section class="features">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-pills"></i>
-                    </div>
-                    <h4>Medication Tracker</h4>
-                    <p>Never miss a dose with smart medication reminders and tracking system</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-heartbeat"></i>
-                    </div>
-                    <h4>Health Symptom Checker</h4>
-                    <p>Identify potential health issues based on symptoms and behaviors</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-ambulance"></i>
-                    </div>
-                    <h4>Emergency Vet Locator</h4>
-                    <p>Find the nearest emergency vet with one tap in critical situations</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-syringe"></i>
-                    </div>
-                    <h4>Vaccination Tracker</h4>
-                    <p>Track vaccination schedules and get reminders for boosters</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-utensils"></i>
-                    </div>
-                    <h4>Personalized Diet Plans</h4>
-                    <p>Custom meal plans based on breed, age, and health conditions</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-book-medical"></i>
-                    </div>
-                    <h4>Health History Log</h4>
-                    <p>Maintain complete medical records and track health progress</p>
-                </div>
-            </section>
-            
-            <section class="install-section">
-                <h3><i class="fas fa-mobile-alt"></i> Get Full Health Protection on Your Phone!</h3>
-                <p>Install HydraPup PRO on your device for real-time health monitoring and alerts</p>
-                
-                <div class="install-buttons">
-                    <button class="install-btn" id="installPWA">
-                        <i class="fas fa-download"></i> Install PRO App
-                    </button>
-                </div>
-                
-                <p style="margin-top: 20px; font-size: 16px;">
-                    <i class="fas fa-info-circle"></i> Our app works on all devices - Android, iOS, and desktop
-                </p>
-            </section>
-        </main>
-        
-        <footer>
-            <p>© 2023 HydraPup PRO - Ultimate Dog Health Tracker. All rights reserved.</p>
-            <div class="footer-links">
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms of Service</a>
-                <a href="#">Contact Us</a>
-                <a href="#">Support</a>
-            </div>
-            <p>Disclaimer: This tool provides general guidance. Consult your veterinarian for specific health advice.</p>
-        </footer>
+    
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <i class="fas fa-bell"></i>
+        <div class="notification-content">
+            <h4>Reminder!</h4>
+            <p>Time for Charlie's medication</p>
+        </div>
     </div>
-
+    
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Pet Health Logo">
+                    <h1>Pro Pet Health <span>PRO</span></h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#features"><i class="fas fa-paw"></i> Features</a></li>
+                        <li><a href="#pricing"><i class="fas fa-tag"></i> Pricing</a></li>
+                        <li><a href="#training"><i class="fas fa-graduation-cap"></i> Training</a></li>
+                        <li><a href="#testimonials"><i class="fas fa-comments"></i> Testimonials</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2>Ultimate Health Companion for Your Pet</h2>
+                <p>Professional pet care management with all the features you need in one place</p>
+                <button class="cta-button" id="getStarted">
+                    <i class="fas fa-rocket"></i> Get Started Now
+                </button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title">Pro Features</h2>
+            
+            <div class="demo-ui">
+                <div class="demo-element">
+                    <h4><i class="fas fa-pills"></i> Medication</h4>
+                    <p>2 doses today</p>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 65%"></div>
+                    </div>
+                </div>
+                
+                <div class="demo-element">
+                    <h4><i class="fas fa-tint"></i> Hydration</h4>
+                    <p>1.2L / 1.5L</p>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 80%"></div>
+                    </div>
+                </div>
+                
+                <div class="demo-element">
+                    <h4><i class="fas fa-syringe"></i> Vaccinations</h4>
+                    <p>Next: Rabies</p>
+                    <div class="status upcoming">June 15</div>
+                </div>
+                
+                <div class="demo-element">
+                    <h4><i class="fas fa-heartbeat"></i> Health Check</h4>
+                    <p>Last: Normal</p>
+                    <div class="status completed">May 28</div>
+                </div>
+            </div>
+            
+            <div class="features-grid">
+                <!-- Medication Tracker -->
+                <div class="feature-card">
+                    <div class="feature-img">
+                        <img src="https://images.unsplash.com/photo-1582481725274-d63d1d67a9d6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Medication Tracker">
+                    </div>
+                    <div class="feature-content">
+                        <h3><div class="icon"><i class="fas fa-pills"></i></div> Medication Tracker</h3>
+                        <p>Never miss a dose with our advanced medication scheduling system. Receive notifications and track medication history.</p>
+                    </div>
+                </div>
+                
+                <!-- Dog Hydration -->
+                <div class="feature-card">
+                    <div class="feature-img">
+                        <img src="https://images.unsplash.com/photo-1560807707-8cc77767d783?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Dog Hydration">
+                    </div>
+                    <div class="feature-content">
+                        <h3><div class="icon"><i class="fas fa-tint"></i></div> Dog Hydration</h3>
+                        <p>Monitor your dog's water intake and ensure proper hydration with daily tracking and reminders.</p>
+                    </div>
+                </div>
+                
+                <!-- Health Symptom Checker -->
+                <div class="feature-card">
+                    <div class="feature-img">
+                        <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Health Symptom Checker">
+                    </div>
+                    <div class="feature-content">
+                        <h3><div class="icon"><i class="fas fa-stethoscope"></i></div> Health Symptom Checker</h3>
+                        <p>Identify potential health issues based on symptoms and get recommendations for next steps.</p>
+                    </div>
+                </div>
+                
+                <!-- Emergency Vet Locator -->
+                <div class="feature-card">
+                    <div class="feature-img">
+                        <img src="https://images.unsplash.com/photo-1583339793403-3b8a156443ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Emergency Vet Locator">
+                    </div>
+                    <div class="feature-content">
+                        <h3><div class="icon"><i class="fas fa-ambulance"></i></div> Emergency Vet Locator</h3>
+                        <p>Find the nearest emergency veterinary clinics with directions, contact information, and ratings.</p>
+                    </div>
+                </div>
+                
+                <!-- Vaccination Tracker -->
+                <div class="feature-card">
+                    <div class="feature-img">
+                        <img src="https://images.unsplash.com/photo-1575425186775-b8de9a427e67?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Vaccination Tracker">
+                    </div>
+                    <div class="feature-content">
+                        <h3><div class="icon"><i class="fas fa-syringe"></i></div> Vaccination Tracker</h3>
+                        <p>Maintain complete vaccination records with automatic reminders for upcoming boosters.</p>
+                    </div>
+                </div>
+                
+                <!-- Personalized Diet Plans -->
+                <div class="feature-card">
+                    <div class="feature-img">
+                        <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Personalized Diet Plans">
+                    </div>
+                    <div class="feature-content">
+                        <h3><div class="icon"><i class="fas fa-utensils"></i></div> Personalized Diet Plans</h3>
+                        <p>Customized nutrition plans based on your pet's breed, age, weight, and health conditions.</p>
+                    </div>
+                </div>
+                
+                <!-- Health History Log -->
+                <div class="feature-card">
+                    <div class="feature-img">
+                        <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Health History Log">
+                    </div>
+                    <div class="feature-content">
+                        <h3><div class="icon"><i class="fas fa-clipboard-list"></i></div> Health History Log</h3>
+                        <p>Centralized storage for all your pet's medical records, vet visits, and health notes.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <h2 class="section-title">Premium Pricing</h2>
+            
+            <div class="pricing-cards">
+                <!-- Basic Plan -->
+                <div class="pricing-card">
+                    <h3>Basic Plan</h3>
+                    <div class="price">$0<span>/month</span></div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Medication Tracker</li>
+                        <li><i class="fas fa-check"></i> Hydration Monitor</li>
+                        <li><i class="fas fa-times"></i> Symptom Checker</li>
+                        <li><i class="fas fa-times"></i> Vet Locator</li>
+                        <li><i class="fas fa-times"></i> Vaccination Tracker</li>
+                        <li><i class="fas fa-times"></i> Diet Plans</li>
+                        <li><i class="fas fa-times"></i> Health History</li>
+                    </ul>
+                    <button class="cta-button">Get Basic</button>
+                </div>
+                
+                <!-- PRO Plan -->
+                <div class="pricing-card pro-card">
+                    <div class="pro-badge">RECOMMENDED</div>
+                    <h3>PRO Plan</h3>
+                    <div class="price">$10<span>/month</span></div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Medication Tracker</li>
+                        <li><i class="fas fa-check"></i> Hydration Monitor</li>
+                        <li><i class="fas fa-check"></i> Symptom Checker</li>
+                        <li><i class="fas fa-check"></i> Vet Locator</li>
+                        <li><i class="fas fa-check"></i> Vaccination Tracker</li>
+                        <li><i class="fas fa-check"></i> Diet Plans</li>
+                        <li><i class="fas fa-check"></i> Health History</li>
+                        <li><i class="fas fa-check"></i> Priority Support</li>
+                        <li><i class="fas fa-check"></i> Unlimited Pets</li>
+                    </ul>
+                    <button class="cta-button">Get PRO Version</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Free Training Section -->
+    <section class="training" id="training">
+        <div class="container">
+            <div class="training-content">
+                <h2>Free Dog Training Course</h2>
+                <p>As a special bonus for our PRO users, we're offering a comprehensive dog training course at no extra cost. No credit cards required, no trials - just free professional training!</p>
+                <a href="https://tinyurl.com/dogtrainingfreee" class="cta-button" target="_blank">
+                    <i class="fas fa-graduation-cap"></i> Access Free Training
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Testimonials -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <h2 class="section-title">User Testimonials</h2>
+            
+            <div class="testimonial-grid">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "This app has transformed how I care for my three dogs. The medication reminders have been a lifesaver, and the vet locator helped us during an emergency!"
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-img">
+                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Sarah M.">
+                        </div>
+                        <div class="author-info">
+                            <h4>Sarah M.</h4>
+                            <p>Dog Owner</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "As a veterinarian, I recommend this app to all my clients. The health history log makes it easy to track patient information between visits."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-img">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Dr. James K.">
+                        </div>
+                        <div class="author-info">
+                            <h4>Dr. James K.</h4>
+                            <p>Veterinarian</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "The personalized diet plans helped my overweight Labrador lose 8 pounds in 3 months! The PRO version is worth every penny."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-img">
+                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Michael T.">
+                        </div>
+                        <div class="author-info">
+                            <h4>Michael T.</h4>
+                            <p>Pet Lover</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Pro Pet Health</h3>
+                    <p>The ultimate health companion for your beloved pets. Professional care management for dogs and cats.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Features</h3>
+                    <ul>
+                        <li><a href="#">Medication Tracker</a></li>
+                        <li><a href="#">Dog Hydration</a></li>
+                        <li><a href="#">Symptom Checker</a></li>
+                        <li><a href="#">Emergency Vet Locator</a></li>
+                        <li><a href="#">Vaccination Tracker</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Pet Health Guides</a></li>
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#">Support Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">GDPR Compliance</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                &copy; 2023 Pro Pet Health Companion. All rights reserved. PRO Version 4.2
+            </div>
+        </div>
+    </footer>
+    
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const calculateBtn = document.querySelector('.calculate-btn');
-            const resultsContainer = document.querySelector('.results-container');
-            const waterResult = document.querySelector('.water-result');
-            const riskLevel = document.querySelector('.risk-level');
-            const riskLabel = document.querySelector('.risk-label');
-            const installPWA = document.getElementById('installPWA');
-            const installButton = document.getElementById('installButton');
+        // Install Button Functionality
+        document.getElementById('installButton').addEventListener('click', async () => {
+            // In a real PWA, this would trigger the installation prompt
+            alert('Η εφαρμογή θα εγκατασταθεί στην συσκευή σας. Σε πραγματική εφαρμογή, αυτό θα ενεργοποιούσε την εγκατάσταση PWA.');
+        });
+        
+        // Notification Demo
+        document.getElementById('getStarted').addEventListener('click', () => {
+            const notification = document.getElementById('notification');
+            notification.classList.add('show');
             
-            // Water calculation functionality
-            calculateBtn.addEventListener('click', function() {
-                const weight = parseFloat(document.getElementById('dogWeight').value);
-                
-                if (isNaN(weight) || weight <= 0) {
-                    alert('Please enter a valid weight for your dog');
-                    return;
-                }
-                
-                // Calculate water needs (50ml per kg as base)
-                let water = weight * 50;
-                
-                // Adjust for activity level
-                const activity = document.getElementById('activityLevel').value;
-                if (activity === 'high') water *= 1.3;
-                else if (activity === 'medium') water *= 1.1;
-                
-                // Adjust for temperature
-                const temp = document.getElementById('temperature').value;
-                if (temp === 'hot') water *= 1.4;
-                else if (temp === 'moderate') water *= 1.2;
-                
-                // Convert to liters and format
-                const liters = water / 1000;
-                waterResult.textContent = `${liters.toFixed(1)}L`;
-                
-                // Calculate risk level (simplified)
-                let riskPercentage = 30;
-                let riskClass = 'risk-medium';
-                let riskText = 'Moderate Risk';
-                
-                if (temp === 'hot') {
-                    riskPercentage = 65;
-                    riskClass = 'risk-medium';
-                    riskText = 'Moderate Risk';
-                }
-                
-                if (activity === 'high' && temp === 'hot') {
-                    riskPercentage = 85;
-                    riskClass = 'risk-high';
-                    riskText = 'High Risk!';
-                }
-                
-                if (temp === 'cool' && activity === 'low') {
-                    riskPercentage = 15;
-                    riskClass = 'risk-low';
-                    riskText = 'Low Risk';
-                }
-                
-                riskLevel.style.width = `${riskPercentage}%`;
-                riskLabel.textContent = riskText;
-                riskLabel.className = `risk-label ${riskClass}`;
-                
-                // Show results
-                resultsContainer.style.display = 'block';
-                
-                // Scroll to results
-                resultsContainer.scrollIntoView({ behavior: 'smooth' });
-            });
-            
-            // PWA Installation functionality
-            let deferredPrompt;
-            let installPromptShown = false;
-            
-            window.addEventListener('beforeinstallprompt', (e) => {
-                // Prevent the mini-infobar from appearing on mobile
-                e.preventDefault();
-                
-                // Only show the prompt once per session
-                if (!installPromptShown) {
-                    // Stash the event so it can be triggered later
-                    deferredPrompt = e;
-                    // Show the install button
-                    installButton.style.display = 'flex';
-                    
-                    // Set flag to prevent showing again
-                    installPromptShown = true;
-                }
-            });
-            
-            // Add click event for install button in footer
-            installPWA.addEventListener('click', async () => {
-                if (deferredPrompt) {
-                    // Show the install prompt
-                    deferredPrompt.prompt();
-                    // Wait for the user to respond to the prompt
-                    const { outcome } = await deferredPrompt.userChoice;
-                    
-                    if (outcome === 'accepted') {
-                        console.log('User accepted the install prompt');
-                        // Hide the install button after installation
-                        installButton.style.display = 'none';
-                    } else {
-                        console.log('User dismissed the install prompt');
-                    }
-                    
-                    // We've used the prompt, and can't use it again, throw it away
-                    deferredPrompt = null;
-                } else {
-                    // The deferred prompt isn't available, show instructions
-                    alert("To install this app:\n\n1. Open your browser menu (three dots)\n2. Tap 'Install' or 'Add to Home Screen'");
-                }
-            });
-            
-            // Add click event for floating install button
-            installButton.addEventListener('click', async () => {
-                if (deferredPrompt) {
-                    deferredPrompt.prompt();
-                    const { outcome } = await deferredPrompt.userChoice;
-                    
-                    if (outcome === 'accepted') {
-                        console.log('User accepted the install prompt');
-                        // Hide the install button after installation
-                        installButton.style.display = 'none';
-                    }
-                    
-                    deferredPrompt = null;
-                }
-            });
-            
-            // Hide install button after 30 seconds if not clicked
             setTimeout(() => {
-                if (installButton.style.display === 'flex') {
-                    installButton.style.display = 'none';
+                notification.classList.remove('show');
+            }, 5000);
+        });
+        
+        // Simulate PRO version features
+        document.querySelectorAll('.pricing-card .cta-button').forEach(button => {
+            button.addEventListener('click', function() {
+                if (this.textContent.includes('PRO')) {
+                    alert('Συγχαρητήρια! Αγοράσατε την Pro έκδοση για $10/μήνα. Όλες οι λειτουργίες είναι τώρα ενεργοποιημένες!');
+                } else {
+                    alert('Ξεκινάτε με το Δωρεάν Πλάνο. Αναβαθμίστε στην Pro έκδοση για πρόσβαση σε όλες τις λειτουργίες!');
                 }
-            }, 30000);
-            
-            // Show demo results if parameters are present in URL
-            const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.has('demo')) {
-                document.getElementById('dogWeight').value = 25;
-                setTimeout(() => {
-                    calculateBtn.click();
-                }, 500);
-            }
+            });
+        });
+        
+        // Free Training Button
+        document.querySelector('.training .cta-button').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Ανακατεύθυνση στην σελίδα δωρεάν εκπαίδευσης σκύλων. Σε πραγματική εφαρμογή, αυτό θα ανοίγει το λινκ: https://tinyurl.com/dogtrainingfreee');
+            window.location.href = 'https://tinyurl.com/dogtrainingfreee';
+        });
+        
+        // Demo for feature cards
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const title = this.querySelector('h3').textContent;
+                alert(`Λειτουργία "${title}" ενεργοποιημένη! Στην πλήρη έκδοση, αυτό θα ανοίξει την αντίστοιχη οθόνη διαχείρισης.`);
+            });
+        });
+        
+        // Simulate PWA installation prompt
+        window.addEventListener('beforeinstallprompt', (e) => {
+            // Prevent the mini-infobar from appearing on mobile
+            e.preventDefault();
+            // Stash the event so it can be triggered later
+            window.deferredPrompt = e;
+            // Show the install button
+            document.getElementById('installButton').style.display = 'flex';
         });
     </script>
 </body>
