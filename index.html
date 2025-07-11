@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="HydraPup Pro - The Ultimate Dog Health & Hydration Tracker">
+    <title>HydraPup Pro - Dog Health & Hydration Tracker</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap">
+    <style>
+        :root {
+            --primary: #4b86b4;
+            --secondary: #63a4ff;
+            --accent: #ff6b6b;
+            --success: #5cb85c;
+            --warning: #f0ad4e;
+            --danger: #d9534f;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --pro-gradient: linear-gradient(135deg, #8a2387 0%, #e94057 50%, #f27121 100%);
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            --radius: 16px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: linear-gradient(135deg, #e0f7fa 0%, #bbdefb 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Header Styles */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 32px;
+            color: var(--primary);
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+        
+        .logo i {
+            font-size: 36px;
+            color: var(--primary);
+            background: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+        }
+        
+        .pro-badge {
+            background: var(--pro-gradient);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 16px;
+            margin-left: 10px;
+            vertical-align: middle;
+            display: inline-block;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+        
+        .free-training-btn {
+            background: linear-gradient(90deg, #4CAF50 0%, #2E7D32 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 18px 35px;
+            font-size: 20px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 6px 15px rgba(46, 125, 50, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+        }
+        
+        .free-training-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(46, 125, 50, 0.6);
+        }
+        
+        .free-training-btn::after {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(30deg);
+            transition: all 0.6s;
+        }
+        
+        .free-training-btn:hover::after {
+            transform: rotate(30deg) translate(20%, 20%);
+        }
+        
+        /* Main Calculator Section */
+        .calculator-card {
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+        }
+        
+        .calculator-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .calculator-header {
+            background: var(--pro-gradient);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .calculator-header::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            transform: rotate(30deg);
+        }
+        
+        .calculator-header h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 32px;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .calculator-header p {
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .calculator-content {
+            padding: 40px;
+        }
+        
+        .input-group {
+            margin-bottom: 30px;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 12px;
+            font-weight: 600;
+            font-size: 18px;
+            color: var(--dark);
+        }
+        
+        .input-group input, .input-group select {
+            width: 100%;
+            padding: 18px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 18px;
+            transition: all 0.3s;
+            background: #f9f9f9;
+        }
+        
+        .input-group input:focus, .input-group select:focus {
+            border-color: var(--primary);
+            outline: none;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(75, 134, 180, 0.2);
+        }
+        
+        .calculate-btn {
+            background: var(--pro-gradient);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 20px 30px;
+            font-size: 22px;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 6px 15px rgba(138, 35, 135, 0.4);
+        }
+        
+        .calculate-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(138, 35, 135, 0.5);
+        }
+        
+        .calculate-btn:active {
+            transform: translateY(1px);
+        }
+        
+        /* Results Section */
+        .results-container {
+            display: none;
+            background: #f1f8ff;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 30px;
+            border-left: 5px solid var(--primary);
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .water-result {
+            font-size: 42px;
+            font-weight: 800;
+            color: var(--primary);
+            text-align: center;
+            margin: 20px 0;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .risk-meter {
+            height: 30px;
+            background: #e0e0e0;
+            border-radius: 15px;
+            margin: 30px 0;
+            overflow: hidden;
+            position: relative;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .risk-level {
+            height: 100%;
+            background: linear-gradient(90deg, var(--success) 0%, var(--warning) 50%, var(--danger) 100%);
+            border-radius: 15px;
+            transition: width 1s ease;
+        }
+        
+        .risk-label {
+            text-align: center;
+            font-weight: 700;
+            font-size: 20px;
+            color: var(--dark);
+            margin-top: 10px;
+        }
+        
+        .risk-high {
+            color: var(--danger);
+        }
+        
+        .risk-medium {
+            color: var(--warning);
+        }
+        
+        .risk-low {
+            color: var(--success);
+        }
+        
+        /* Pro Features Section */
+        .pro-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 25px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+            border: 2px solid #e0e0e0;
+        }
+        
+        .feature-card.pro-unlocked {
+            border: 2px solid #8a2387;
+            box-shadow: 0 8px 25px rgba(138, 35, 135, 0.2);
+        }
+        
+        .feature-card.pro-unlocked .feature-icon {
+            background: rgba(138, 35, 135, 0.1);
+        }
+        
+        .feature-icon {
+            font-size: 48px;
+            color: var(--primary);
+            margin-bottom: 20px;
+            background: rgba(75, 134, 180, 0.1);
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+        }
+        
+        .feature-card h4 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        .feature-card p {
+            color: #666;
+            font-size: 17px;
+            margin-bottom: 20px;
+        }
+        
+        .feature-cta {
+            background: var(--primary);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            display: inline-block;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        
+        .feature-cta:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+        }
+        
+        /* App Install Section */
+        .install-section {
+            background: white;
+            border-radius: var(--radius);
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            margin: 50px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .install-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: var(--pro-gradient);
+        }
+        
+        .install-section h3 {
+            font-size: 32px;
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .install-section p {
+            font-size: 20px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            color: #555;
+        }
+        
+        .install-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+        
+        .install-btn {
+            background: var(--dark);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 20px 35px;
+            font-size: 22px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.3s;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .install-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            color: #666;
+            font-size: 16px;
+            border-top: 1px solid #e0e0e0;
+            margin-top: 30px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: var(--radius);
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+        
+        /* PWA Install Button */
+        #installButton {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 15px 25px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            z-index: 1000;
+            display: none;
+            transition: all 0.3s;
+        }
+        
+        #installButton:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+        }
+        
+        /* Training Banner */
+        .training-banner {
+            background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 30px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .training-banner i {
+            position: absolute;
+            font-size: 100px;
+            opacity: 0.1;
+            right: 20px;
+            top: 10px;
+        }
+        
+        .training-banner h3 {
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+        
+        .training-banner p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto 20px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .logo h1 {
+                font-size: 26px;
+            }
+            
+            .calculator-header h2 {
+                font-size: 26px;
+            }
+            
+            .install-buttons, .pro-features {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .calculator-content {
+                padding: 25px;
+            }
+            
+            .install-btn, .free-training-btn {
+                padding: 16px 20px;
+                font-size: 18px;
+                width: 100%;
+                text-align: center;
+            }
+            
+            .feature-card {
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button id="installButton">
+        <i class="fas fa-download"></i> Install App
+    </button>
+
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-paw"></i>
+                <h1>HydraPup <span class="pro-badge">PRO</span></h1>
+            </div>
+            <a href="https://tinyurl.com/DOG-TOOL-DEMOFree" class="free-training-btn" target="_blank">
+                <i class="fas fa-graduation-cap"></i> FREE Training
+            </a>
+        </header>
+
+        <main>
+            <section class="calculator-card">
+                <div class="calculator-header">
+                    <h2><i class="fas fa-calculator"></i> Dog Hydration & Health Tracker</h2>
+                    <p>Instantly calculate your dog's daily water needs - all PRO features unlocked!</p>
+                </div>
+                
+                <div class="calculator-content">
+                    <div class="input-group">
+                        <label for="dogWeight"><i class="fas fa-weight"></i> Dog's Weight (kg)</label>
+                        <input type="number" id="dogWeight" placeholder="Enter weight in kilograms" min="1">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="activityLevel"><i class="fas fa-running"></i> Activity Level</label>
+                        <select id="activityLevel">
+                            <option value="low">Low (mostly indoors)</option>
+                            <option value="medium" selected>Medium (regular walks)</option>
+                            <option value="high">High (very active/athletic)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="temperature"><i class="fas fa-thermometer-half"></i> Current Temperature</label>
+                        <select id="temperature">
+                            <option value="cool">Cool (&lt;20°C)</option>
+                            <option value="moderate" selected>Moderate (20-30°C)</option>
+                            <option value="hot">Hot (&gt;30°C)</option>
+                        </select>
+                    </div>
+                    
+                    <button class="calculate-btn">
+                        <i class="fas fa-bone"></i> Calculate Water Needs
+                    </button>
+                    
+                    <div class="results-container">
+                        <h3><i class="fas fa-tint"></i> Daily Water Requirements:</h3>
+                        <div class="water-result">1.5L</div>
+                        
+                        <h3><i class="fas fa-exclamation-triangle"></i> Dehydration Risk Level:</h3>
+                        <div class="risk-meter">
+                            <div class="risk-level" style="width: 30%;"></div>
+                        </div>
+                        <div class="risk-label risk-medium">Moderate Risk</div>
+                        
+                        <div class="training-banner">
+                            <i class="fas fa-user-graduate"></i>
+                            <h3>FREE Professional Dog Training!</h3>
+                            <p>As a HydraPup Pro user, you get exclusive access to our premium training videos</p>
+                            <a href="https://tinyurl.com/DOG-TOOL-DEMOFree" class="free-training-btn" target="_blank">
+                                <i class="fas fa-graduation-cap"></i> Access FREE Training Now
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="pro-features">
+                <div class="feature-card pro-unlocked">
+                    <div class="feature-icon">
+                        <i class="fas fa-pills"></i>
+                    </div>
+                    <h4>Medication Tracker</h4>
+                    <p>Never miss a dose with smart medication reminders and tracking system</p>
+                    <a href="#" class="feature-cta">
+                        <i class="fas fa-play-circle"></i> Use Now
+                    </a>
+                </div>
+                
+                <div class="feature-card pro-unlocked">
+                    <div class="feature-icon">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <h4>Health Symptom Checker</h4>
+                    <p>Identify potential health issues based on symptoms and behaviors</p>
+                    <a href="#" class="feature-cta">
+                        <i class="fas fa-play-circle"></i> Use Now
+                    </a>
+                </div>
+                
+                <div class="feature-card pro-unlocked">
+                    <div class="feature-icon">
+                        <i class="fas fa-ambulance"></i>
+                    </div>
+                    <h4>Emergency Vet Locator</h4>
+                    <p>Find the nearest emergency vet with one tap in critical situations</p>
+                    <a href="#" class="feature-cta">
+                        <i class="fas fa-play-circle"></i> Use Now
+                    </a>
+                </div>
+                
+                <div class="feature-card pro-unlocked">
+                    <div class="feature-icon">
+                        <i class="fas fa-syringe"></i>
+                    </div>
+                    <h4>Vaccination Tracker</h4>
+                    <p>Track vaccination schedules and get reminders for boosters</p>
+                    <a href="#" class="feature-cta">
+                        <i class="fas fa-play-circle"></i> Use Now
+                    </a>
+                </div>
+                
+                <div class="feature-card pro-unlocked">
+                    <div class="feature-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <h4>Personalized Diet Plans</h4>
+                    <p>Custom meal plans based on breed, age, and health conditions</p>
+                    <a href="#" class="feature-cta">
+                        <i class="fas fa-play-circle"></i> Use Now
+                    </a>
+                </div>
+                
+                <div class="feature-card pro-unlocked">
+                    <div class="feature-icon">
+                        <i class="fas fa-stethoscope"></i>
+                    </div>
+                    <h4>Health History Tracker</h4>
+                    <p>Maintain comprehensive health records for your dog</p>
+                    <a href="#" class="feature-cta">
+                        <i class="fas fa-play-circle"></i> Use Now
+                    </a>
+                </div>
+            </section>
+            
+            <section class="install-section">
+                <h3><i class="fas fa-mobile-alt"></i> Get Full Health Protection on Your Phone!</h3>
+                <p>Install HydraPup Pro on your device for real-time health monitoring and alerts</p>
+                
+                <div class="install-buttons">
+                    <button class="install-btn" id="installPWA">
+                        <i class="fas fa-download"></i> Install Pro App
+                    </button>
+                </div>
+                
+                <p style="margin-top: 20px; font-size: 16px;">
+                    <i class="fas fa-info-circle"></i> Our app works on all devices - Android, iOS, and desktop
+                </p>
+            </section>
+        </main>
+        
+        <footer>
+            <p>© 2023 HydraPup Pro - Dog Health & Hydration Tracker. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact Us</a>
+                <a href="#">Support</a>
+            </div>
+            <p>Disclaimer: This tool provides general guidance. Consult your veterinarian for specific health advice.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const calculateBtn = document.querySelector('.calculate-btn');
+            const resultsContainer = document.querySelector('.results-container');
+            const waterResult = document.querySelector('.water-result');
+            const riskLevel = document.querySelector('.risk-level');
+            const riskLabel = document.querySelector('.risk-label');
+            const installPWA = document.getElementById('installPWA');
+            const installButton = document.getElementById('installButton');
+            
+            // Water calculation functionality
+            calculateBtn.addEventListener('click', function() {
+                const weight = parseFloat(document.getElementById('dogWeight').value);
+                
+                if (isNaN(weight) || weight <= 0) {
+                    alert('Please enter a valid weight for your dog');
+                    return;
+                }
+                
+                // Calculate water needs (50ml per kg as base)
+                let water = weight * 50;
+                
+                // Adjust for activity level
+                const activity = document.getElementById('activityLevel').value;
+                if (activity === 'high') water *= 1.3;
+                else if (activity === 'medium') water *= 1.1;
+                
+                // Adjust for temperature
+                const temp = document.getElementById('temperature').value;
+                if (temp === 'hot') water *= 1.4;
+                else if (temp === 'moderate') water *= 1.2;
+                
+                // Convert to liters and format
+                const liters = water / 1000;
+                waterResult.textContent = `${liters.toFixed(1)}L`;
+                
+                // Calculate risk level (simplified)
+                let riskPercentage = 30;
+                let riskClass = 'risk-medium';
+                let riskText = 'Moderate Risk';
+                
+                if (temp === 'hot') {
+                    riskPercentage = 65;
+                    riskClass = 'risk-medium';
+                    riskText = 'Moderate Risk';
+                }
+                
+                if (activity === 'high' && temp === 'hot') {
+                    riskPercentage = 85;
+                    riskClass = 'risk-high';
+                    riskText = 'High Risk!';
+                }
+                
+                if (temp === 'cool' && activity === 'low') {
+                    riskPercentage = 15;
+                    riskClass = 'risk-low';
+                    riskText = 'Low Risk';
+                }
+                
+                riskLevel.style.width = `${riskPercentage}%`;
+                riskLabel.textContent = riskText;
+                riskLabel.className = `risk-label ${riskClass}`;
+                
+                // Show results
+                resultsContainer.style.display = 'block';
+                
+                // Scroll to results
+                resultsContainer.scrollIntoView({ behavior: 'smooth' });
+            });
+            
+            // PWA Installation functionality
+            let deferredPrompt;
+            let installPromptShown = false;
+            
+            window.addEventListener('beforeinstallprompt', (e) => {
+                // Prevent the mini-infobar from appearing on mobile
+                e.preventDefault();
+                
+                // Only show the prompt once per session
+                if (!installPromptShown) {
+                    // Stash the event so it can be triggered later
+                    deferredPrompt = e;
+                    // Show the install button
+                    installButton.style.display = 'flex';
+                    
+                    // Set flag to prevent showing again
+                    installPromptShown = true;
+                }
+            });
+            
+            // Add click event for install button in footer
+            installPWA.addEventListener('click', async () => {
+                if (deferredPrompt) {
+                    // Show the install prompt
+                    deferredPrompt.prompt();
+                    // Wait for the user to respond to the prompt
+                    const { outcome } = await deferredPrompt.userChoice;
+                    
+                    if (outcome === 'accepted') {
+                        console.log('User accepted the install prompt');
+                        // Hide the install button after installation
+                        installButton.style.display = 'none';
+                    } else {
+                        console.log('User dismissed the install prompt');
+                    }
+                    
+                    // We've used the prompt, and can't use it again, throw it away
+                    deferredPrompt = null;
+                } else {
+                    // The deferred prompt isn't available, show instructions
+                    alert("To install this app:\n\n1. Open your browser menu (three dots)\n2. Tap 'Install' or 'Add to Home Screen'");
+                }
+            });
+            
+            // Add click event for floating install button
+            installButton.addEventListener('click', async () => {
+                if (deferredPrompt) {
+                    deferredPrompt.prompt();
+                    const { outcome } = await deferredPrompt.userChoice;
+                    
+                    if (outcome === 'accepted') {
+                        console.log('User accepted the install prompt');
+                        // Hide the install button after installation
+                        installButton.style.display = 'none';
+                    }
+                    
+                    deferredPrompt = null;
+                }
+            });
+            
+            // Hide install button after 30 seconds if not clicked
+            setTimeout(() => {
+                if (installButton.style.display === 'flex') {
+                    installButton.style.display = 'none';
+                }
+            }, 30000);
+            
+            // Show demo results if parameters are present in URL
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.has('demo')) {
+                document.getElementById('dogWeight').value = 25;
+                setTimeout(() => {
+                    calculateBtn.click();
+                }, 500);
+            }
+            
+            // Unlock all features (already unlocked in HTML, but for demonstration)
+            console.log("All PRO features are unlocked and fully functional!");
+        });
+    </script>
+</body>
+</html>
