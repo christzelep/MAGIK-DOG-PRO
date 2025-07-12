@@ -1,52 +1,49 @@
 <!DOCTYPE html>
-<html lang="el">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pro Pet Health Companion | Pro Edition</title>
+    <title>Pro Pet Health Companion</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="manifest" href="/manifest.json">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #4e54c8;
-            --secondary: #8f94fb;
             --accent: #ff6b6b;
+            --dark: #2c3e50;
             --light: #f8f9fa;
-            --dark: #343a40;
             --success: #28a745;
             --warning: #ffc107;
-            --info: #17a2b8;
-            --radius: 12px;
-            --shadow: 0 4px 20px rgba(0,0,0,0.08);
+            --radius: 10px;
+            --shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
         
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         body {
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4e7f1 100%);
-            color: var(--dark);
+            font-family: 'Poppins', sans-serif;
             line-height: 1.6;
-            min-height: 100vh;
-            padding-bottom: 60px;
+            color: #333;
+            background: #f0f2f5;
+            overflow-x: hidden;
         }
         
         .container {
+            width: 90%;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 15px;
         }
         
-        /* Header Styles */
+        /* Header */
         header {
-            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
-            color: white;
-            padding: 20px 0;
+            background: white;
             box-shadow: var(--shadow);
+            padding: 20px 0;
             position: sticky;
             top: 0;
             z-index: 100;
@@ -65,11 +62,11 @@
         }
         
         .logo img {
-            height: 50px;
             width: 50px;
+            height: 50px;
             border-radius: 50%;
             object-fit: cover;
-            border: 2px solid white;
+            border: 2px solid var(--primary);
         }
         
         .logo h1 {
@@ -79,41 +76,61 @@
         
         .logo span {
             background: var(--accent);
+            color: white;
             padding: 2px 8px;
             border-radius: 20px;
-            font-size: 0.8rem;
-            margin-left: 10px;
+            font-size: 0.9rem;
+            margin-left: 5px;
         }
         
         nav ul {
             display: flex;
             list-style: none;
-            gap: 25px;
+            gap: 30px;
         }
         
-        nav a {
-            color: white;
+        nav ul li a {
             text-decoration: none;
+            color: var(--dark);
             font-weight: 500;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
             display: flex;
             align-items: center;
             gap: 8px;
+            transition: all 0.3s ease;
+            position: relative;
         }
         
-        nav a:hover {
-            color: #ffde7d;
-            transform: translateY(-2px);
+        nav ul li a:hover {
+            color: var(--primary);
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        nav ul li a i {
+            font-size: 1.1rem;
         }
         
         /* Hero Section */
         .hero {
-            padding: 80px 0 50px;
-            text-align: center;
-            background: url('https://images.unsplash.com/photo-1535930749574-1399327ce78f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
+            background: linear-gradient(135deg, #4e54c8 0%, #8f94fb 100%);
             color: white;
+            padding: 100px 0;
+            text-align: center;
             position: relative;
+            overflow: hidden;
         }
         
         .hero::before {
@@ -123,43 +140,44 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(78, 84, 200, 0.85);
+            background: url('https://images.unsplash.com/photo-1517423568366-8b83523034fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
+            opacity: 0.1;
         }
         
         .hero-content {
-            position: relative;
-            z-index: 2;
             max-width: 800px;
             margin: 0 auto;
+            position: relative;
+            z-index: 2;
         }
         
         .hero h2 {
-            font-size: 3.5rem;
+            font-size: 3rem;
             margin-bottom: 20px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            line-height: 1.2;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
         
         .hero p {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             margin-bottom: 30px;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+            opacity: 0.9;
         }
         
         .cta-button {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 15px 35px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            background: var(--accent);
-            color: white;
-            padding: 15px 35px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.2rem;
             transition: all 0.3s ease;
-            box-shadow: 0 6px 15px rgba(255, 107, 107, 0.4);
-            border: none;
-            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
         }
         
         .cta-button:hover {
@@ -170,14 +188,17 @@
         
         /* Features Section */
         .features {
-            padding: 80px 0;
+            padding: 100px 0;
+            background: url('https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover fixed;
+            background-blend-mode: overlay;
+            background-color: rgba(255, 255, 255, 0.9);
         }
         
         .section-title {
             text-align: center;
-            margin-bottom: 60px;
             font-size: 2.5rem;
-            color: var(--primary);
+            margin-bottom: 60px;
+            color: var(--dark);
             position: relative;
         }
         
@@ -187,7 +208,7 @@
             bottom: -15px;
             left: 50%;
             transform: translateX(-50%);
-            width: 100px;
+            width: 80px;
             height: 4px;
             background: var(--accent);
             border-radius: 2px;
@@ -195,8 +216,9 @@
         
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
         }
         
         .feature-card {
@@ -204,16 +226,17 @@
             border-radius: var(--radius);
             overflow: hidden;
             box-shadow: var(--shadow);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.4s ease;
+            border: 1px solid #eaeaea;
         }
         
         .feature-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
         }
         
         .feature-img {
-            height: 200px;
+            height: 220px;
             overflow: hidden;
         }
         
@@ -221,7 +244,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease;
+            transition: all 0.5s ease;
         }
         
         .feature-card:hover .feature-img img {
@@ -233,12 +256,27 @@
         }
         
         .feature-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            color: var(--primary);
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .feature-content h3 .icon {
+            background: rgba(78, 84, 200, 0.1);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .feature-content h3 i {
+            color: var(--primary);
+            font-size: 1.2rem;
         }
         
         .feature-content p {
@@ -246,30 +284,104 @@
             margin-bottom: 20px;
         }
         
-        .feature-content .icon {
-            background: var(--secondary);
+        .feature-action {
+            display: inline-block;
+            background: var(--primary);
             color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-action:hover {
+            background: #3d43b5;
+            transform: translateY(-2px);
+        }
+        
+        /* Demo UI Elements */
+        .demo-ui {
+            background: white;
+            border-radius: var(--radius);
+            padding: 20px;
+            margin-top: 30px;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        
+        .demo-element {
+            width: 200px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: var(--radius);
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .demo-element:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .demo-element h4 {
+            margin-bottom: 10px;
+            color: var(--primary);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
+            gap: 8px;
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background: #e9ecef;
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        
+        .progress {
+            height: 100%;
+            background: var(--success);
+            border-radius: 5px;
+            transition: width 1s ease;
+        }
+        
+        .status {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        .status.upcoming {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .status.completed {
+            background: #d4edda;
+            color: #155724;
         }
         
         /* Pricing Section */
         .pricing {
-            background: linear-gradient(135deg, #eef2f5 0%, #d6e0f0 100%);
-            padding: 80px 0;
-            text-align: center;
+            padding: 100px 0;
+            background: #f8f9fa;
         }
         
         .pricing-cards {
             display: flex;
             justify-content: center;
             gap: 30px;
-            flex-wrap: wrap;
             margin-top: 50px;
         }
         
@@ -277,76 +389,103 @@
             background: white;
             border-radius: var(--radius);
             padding: 40px 30px;
-            width: 350px;
             box-shadow: var(--shadow);
+            width: 100%;
+            max-width: 380px;
             position: relative;
-            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
         }
         
-        .pro-card {
-            border: 3px solid var(--primary);
+        .pricing-card:hover {
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .pricing-card.pro-card {
+            border: 2px solid var(--primary);
             transform: scale(1.05);
+            z-index: 2;
+        }
+        
+        .pro-badge {
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            background: var(--primary);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
         }
         
         .pricing-card h3 {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             margin-bottom: 20px;
-            color: var(--primary);
+            color: var(--dark);
         }
         
         .price {
             font-size: 3rem;
             font-weight: 700;
             color: var(--primary);
-            margin-bottom: 25px;
+            margin-bottom: 30px;
         }
         
         .price span {
-            font-size: 1.2rem;
+            font-size: 1rem;
             color: #777;
+            font-weight: 500;
         }
         
         .pricing-features {
             list-style: none;
             margin-bottom: 30px;
-            text-align: left;
+            flex-grow: 1;
         }
         
         .pricing-features li {
-            padding: 10px 0;
-            border-bottom: 1px solid #eee;
+            margin-bottom: 15px;
             display: flex;
             align-items: center;
             gap: 10px;
         }
         
-        .pricing-features li i {
+        .pricing-features li i.fa-check {
             color: var(--success);
         }
         
-        .pro-badge {
-            position: absolute;
-            top: 20px;
-            right: -30px;
-            background: var(--accent);
-            color: white;
-            padding: 8px 40px;
-            transform: rotate(45deg);
-            font-weight: 600;
-            font-size: 0.9rem;
+        .pricing-features li i.fa-times {
+            color: #ccc;
         }
         
-        /* Free Training Section */
+        /* Training Section */
         .training {
-            padding: 80px 0;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--primary) 0%, #6a71e6 100%);
             color: white;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .training::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
+            opacity: 0.1;
         }
         
         .training-content {
             max-width: 800px;
             margin: 0 auto;
+            position: relative;
+            z-index: 2;
         }
         
         .training h2 {
@@ -356,14 +495,16 @@
         
         .training p {
             font-size: 1.2rem;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             opacity: 0.9;
         }
         
         /* Testimonials */
         .testimonials {
-            padding: 80px 0;
-            background: #f8f9fa;
+            padding: 100px 0;
+            background: url('https://images.unsplash.com/photo-1517423568366-8b83523034fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover fixed;
+            background-color: rgba(255, 255, 255, 0.9);
+            background-blend-mode: overlay;
         }
         
         .testimonial-grid {
@@ -379,6 +520,12 @@
             padding: 30px;
             box-shadow: var(--shadow);
             position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
         }
         
         .testimonial-card::before {
@@ -387,16 +534,17 @@
             top: 20px;
             left: 20px;
             font-size: 5rem;
-            color: rgba(143, 148, 251, 0.2);
+            color: rgba(78, 84, 200, 0.1);
             font-family: Georgia, serif;
             line-height: 1;
         }
         
         .testimonial-text {
-            margin-bottom: 20px;
             font-style: italic;
             color: #555;
-            padding-top: 30px;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 2;
         }
         
         .testimonial-author {
@@ -410,12 +558,18 @@
             height: 60px;
             border-radius: 50%;
             overflow: hidden;
+            border: 2px solid var(--primary);
         }
         
         .author-img img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: all 0.3s ease;
+        }
+        
+        .author-img:hover img {
+            transform: scale(1.1);
         }
         
         .author-info h4 {
@@ -471,6 +625,9 @@
             color: #ddd;
             text-decoration: none;
             transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         
         .footer-column ul li a:hover {
@@ -539,6 +696,10 @@
             .pro-card {
                 transform: scale(1);
             }
+            
+            .features-grid, .testimonial-grid {
+                grid-template-columns: 1fr;
+            }
         }
         
         @media (max-width: 576px) {
@@ -551,6 +712,10 @@
             }
             
             .feature-card {
+                width: 100%;
+            }
+            
+            .demo-element {
                 width: 100%;
             }
         }
@@ -610,62 +775,80 @@
             transform: translateY(-3px);
         }
         
-        /* Demo UI Elements */
-        .demo-ui {
+        /* Interactive UI */
+        .interactive-feature {
             background: white;
             border-radius: var(--radius);
-            padding: 20px;
+            padding: 25px;
             margin-top: 30px;
             box-shadow: var(--shadow);
-            display: flex;
-            flex-wrap: wrap;
+            display: none;
+        }
+        
+        .interactive-feature.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .medication-form, .hydration-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             gap: 20px;
-            justify-content: center;
+            margin-bottom: 20px;
         }
         
-        .demo-element {
-            width: 200px;
-            padding: 15px;
-            background: #f8f9fa;
-            border-radius: var(--radius);
-            text-align: center;
+        .form-group {
+            margin-bottom: 15px;
         }
         
-        .demo-element h4 {
-            margin-bottom: 10px;
-            color: var(--primary);
-        }
-        
-        .progress-bar {
-            height: 10px;
-            background: #e9ecef;
-            border-radius: 5px;
-            overflow: hidden;
-            margin: 10px 0;
-        }
-        
-        .progress {
-            height: 100%;
-            background: var(--success);
-            border-radius: 5px;
-        }
-        
-        .status {
-            display: inline-block;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.85rem;
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
             font-weight: 500;
         }
         
-        .status.upcoming {
-            background: #fff3cd;
-            color: #856404;
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: var(--radius);
+            font-family: 'Poppins', sans-serif;
         }
         
-        .status.completed {
-            background: #d4edda;
-            color: #155724;
+        .submit-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: var(--radius);
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .submit-btn:hover {
+            background: #3d43b5;
+            transform: translateY(-2px);
+        }
+        
+        .pet-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            overflow: hidden;
+            border: 3px solid var(--primary);
+        }
+        
+        .pet-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
     </style>
 </head>
@@ -723,55 +906,111 @@
             <h2 class="section-title">Pro Features</h2>
             
             <div class="demo-ui">
-                <div class="demo-element">
+                <div class="demo-element" id="medicationDemo">
                     <h4><i class="fas fa-pills"></i> Medication</h4>
-                    <p>2 doses today</p>
+                    <p id="doseCount">2 doses today</p>
                     <div class="progress-bar">
-                        <div class="progress" style="width: 65%"></div>
+                        <div class="progress" id="medProgress" style="width: 65%"></div>
                     </div>
                 </div>
                 
-                <div class="demo-element">
+                <div class="demo-element" id="hydrationDemo">
                     <h4><i class="fas fa-tint"></i> Hydration</h4>
-                    <p>1.2L / 1.5L</p>
+                    <p id="waterAmount">1.2L / 1.5L</p>
                     <div class="progress-bar">
-                        <div class="progress" style="width: 80%"></div>
+                        <div class="progress" id="waterProgress" style="width: 80%"></div>
                     </div>
                 </div>
                 
-                <div class="demo-element">
+                <div class="demo-element" id="vaccinationDemo">
                     <h4><i class="fas fa-syringe"></i> Vaccinations</h4>
                     <p>Next: Rabies</p>
                     <div class="status upcoming">June 15</div>
                 </div>
                 
-                <div class="demo-element">
+                <div class="demo-element" id="healthCheckDemo">
                     <h4><i class="fas fa-heartbeat"></i> Health Check</h4>
                     <p>Last: Normal</p>
                     <div class="status completed">May 28</div>
                 </div>
             </div>
             
+            <!-- Interactive Medication Feature -->
+            <div class="interactive-feature" id="medicationFeature">
+                <h3><i class="fas fa-pills"></i> Medication Tracker</h3>
+                <div class="pet-avatar">
+                    <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Pet Avatar">
+                </div>
+                <form class="medication-form">
+                    <div class="form-group">
+                        <label for="medicationName">Medication Name</label>
+                        <input type="text" id="medicationName" placeholder="Enter medication name">
+                    </div>
+                    <div class="form-group">
+                        <label for="dosage">Dosage</label>
+                        <input type="text" id="dosage" placeholder="e.g. 10mg">
+                    </div>
+                    <div class="form-group">
+                        <label for="frequency">Frequency</label>
+                        <select id="frequency">
+                            <option value="daily">Daily</option>
+                            <option value="twice">Twice a day</option>
+                            <option value="weekly">Weekly</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="nextDose">Next Dose Time</label>
+                        <input type="time" id="nextDose">
+                    </div>
+                    <button type="button" class="submit-btn" id="saveMedication">Save Medication</button>
+                </form>
+            </div>
+            
+            <!-- Interactive Hydration Feature -->
+            <div class="interactive-feature" id="hydrationFeature">
+                <h3><i class="fas fa-tint"></i> Hydration Tracker</h3>
+                <div class="pet-avatar">
+                    <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Pet Avatar">
+                </div>
+                <form class="hydration-form">
+                    <div class="form-group">
+                        <label for="waterIntake">Water Intake (ml)</label>
+                        <input type="number" id="waterIntake" placeholder="Enter amount">
+                    </div>
+                    <div class="form-group">
+                        <label for="dailyGoal">Daily Goal (ml)</label>
+                        <input type="number" id="dailyGoal" value="1500">
+                    </div>
+                    <button type="button" class="submit-btn" id="saveHydration">Save Hydration</button>
+                </form>
+                <div class="progress-bar" style="margin-top: 20px;">
+                    <div class="progress" id="hydrationProgressBar" style="width: 80%"></div>
+                </div>
+                <p id="hydrationStatus" style="text-align: center; margin-top: 10px;">1.2L / 1.5L</p>
+            </div>
+            
             <div class="features-grid">
                 <!-- Medication Tracker -->
-                <div class="feature-card">
+                <div class="feature-card" data-feature="medication">
                     <div class="feature-img">
                         <img src="https://images.unsplash.com/photo-1582481725274-d63d1d67a9d6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Medication Tracker">
                     </div>
                     <div class="feature-content">
                         <h3><div class="icon"><i class="fas fa-pills"></i></div> Medication Tracker</h3>
                         <p>Never miss a dose with our advanced medication scheduling system. Receive notifications and track medication history.</p>
+                        <div class="feature-action">Track Medication</div>
                     </div>
                 </div>
                 
                 <!-- Dog Hydration -->
-                <div class="feature-card">
+                <div class="feature-card" data-feature="hydration">
                     <div class="feature-img">
                         <img src="https://images.unsplash.com/photo-1560807707-8cc77767d783?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Dog Hydration">
                     </div>
                     <div class="feature-content">
                         <h3><div class="icon"><i class="fas fa-tint"></i></div> Dog Hydration</h3>
                         <p>Monitor your dog's water intake and ensure proper hydration with daily tracking and reminders.</p>
+                        <div class="feature-action">Track Hydration</div>
                     </div>
                 </div>
                 
@@ -783,6 +1022,7 @@
                     <div class="feature-content">
                         <h3><div class="icon"><i class="fas fa-stethoscope"></i></div> Health Symptom Checker</h3>
                         <p>Identify potential health issues based on symptoms and get recommendations for next steps.</p>
+                        <div class="feature-action">Check Symptoms</div>
                     </div>
                 </div>
                 
@@ -794,6 +1034,7 @@
                     <div class="feature-content">
                         <h3><div class="icon"><i class="fas fa-ambulance"></i></div> Emergency Vet Locator</h3>
                         <p>Find the nearest emergency veterinary clinics with directions, contact information, and ratings.</p>
+                        <div class="feature-action">Find Vets</div>
                     </div>
                 </div>
                 
@@ -805,6 +1046,7 @@
                     <div class="feature-content">
                         <h3><div class="icon"><i class="fas fa-syringe"></i></div> Vaccination Tracker</h3>
                         <p>Maintain complete vaccination records with automatic reminders for upcoming boosters.</p>
+                        <div class="feature-action">Track Vaccines</div>
                     </div>
                 </div>
                 
@@ -816,6 +1058,7 @@
                     <div class="feature-content">
                         <h3><div class="icon"><i class="fas fa-utensils"></i></div> Personalized Diet Plans</h3>
                         <p>Customized nutrition plans based on your pet's breed, age, weight, and health conditions.</p>
+                        <div class="feature-action">Create Plan</div>
                     </div>
                 </div>
                 
@@ -827,6 +1070,7 @@
                     <div class="feature-content">
                         <h3><div class="icon"><i class="fas fa-clipboard-list"></i></div> Health History Log</h3>
                         <p>Centralized storage for all your pet's medical records, vet visits, and health notes.</p>
+                        <div class="feature-action">View History</div>
                     </div>
                 </div>
             </div>
@@ -965,32 +1209,32 @@
                 <div class="footer-column">
                     <h3>Features</h3>
                     <ul>
-                        <li><a href="#">Medication Tracker</a></li>
-                        <li><a href="#">Dog Hydration</a></li>
-                        <li><a href="#">Symptom Checker</a></li>
-                        <li><a href="#">Emergency Vet Locator</a></li>
-                        <li><a href="#">Vaccination Tracker</a></li>
+                        <li><a href="#"><i class="fas fa-pills"></i> Medication Tracker</a></li>
+                        <li><a href="#"><i class="fas fa-tint"></i> Dog Hydration</a></li>
+                        <li><a href="#"><i class="fas fa-stethoscope"></i> Symptom Checker</a></li>
+                        <li><a href="#"><i class="fas fa-ambulance"></i> Emergency Vet Locator</a></li>
+                        <li><a href="#"><i class="fas fa-syringe"></i> Vaccination Tracker</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-column">
                     <h3>Resources</h3>
                     <ul>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Pet Health Guides</a></li>
-                        <li><a href="#">FAQs</a></li>
-                        <li><a href="#">Support Center</a></li>
-                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#"><i class="fas fa-blog"></i> Blog</a></li>
+                        <li><a href="#"><i class="fas fa-book"></i> Pet Health Guides</a></li>
+                        <li><a href="#"><i class="fas fa-question-circle"></i> FAQs</a></li>
+                        <li><a href="#"><i class="fas fa-headset"></i> Support Center</a></li>
+                        <li><a href="#"><i class="fas fa-envelope"></i> Contact Us</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-column">
                     <h3>Legal</h3>
                     <ul>
-                        <li><a href="#">Terms of Service</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Cookie Policy</a></li>
-                        <li><a href="#">GDPR Compliance</a></li>
+                        <li><a href="#"><i class="fas fa-file-contract"></i> Terms of Service</a></li>
+                        <li><a href="#"><i class="fas fa-shield-alt"></i> Privacy Policy</a></li>
+                        <li><a href="#"><i class="fas fa-cookie-bite"></i> Cookie Policy</a></li>
+                        <li><a href="#"><i class="fas fa-passport"></i> GDPR Compliance</a></li>
                     </ul>
                 </div>
             </div>
@@ -1005,7 +1249,12 @@
         // Install Button Functionality
         document.getElementById('installButton').addEventListener('click', async () => {
             // In a real PWA, this would trigger the installation prompt
-            alert('Η εφαρμογή θα εγκατασταθεί στην συσκευή σας. Σε πραγματική εφαρμογή, αυτό θα ενεργοποιούσε την εγκατάσταση PWA.');
+            alert('The app will be installed on your device. In a real application, this would trigger the PWA installation.');
+            
+            // Simulate installation
+            document.getElementById('installButton').innerHTML = '<i class="fas fa-check"></i> Installed';
+            document.getElementById('installButton').style.background = 'var(--success)';
+            document.getElementById('installButton').disabled = true;
         });
         
         // Notification Demo
@@ -1018,13 +1267,97 @@
             }, 5000);
         });
         
-        // Simulate PRO version features
+        // Feature Cards Interactivity
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const feature = this.getAttribute('data-feature');
+                
+                // Hide all interactive features first
+                document.querySelectorAll('.interactive-feature').forEach(feature => {
+                    feature.classList.remove('active');
+                });
+                
+                // Show the specific interactive feature
+                if (feature) {
+                    document.getElementById(`${feature}Feature`).classList.add('active');
+                    
+                    // Scroll to the feature
+                    document.getElementById(`${feature}Feature`).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                } else {
+                    const title = this.querySelector('h3').textContent;
+                    alert(`Feature "${title}" activated! In the full version, this would open the management screen.`);
+                }
+            });
+        });
+        
+        // Medication Tracking
+        document.getElementById('saveMedication').addEventListener('click', function() {
+            const medName = document.getElementById('medicationName').value;
+            const dosage = document.getElementById('dosage').value;
+            const frequency = document.getElementById('frequency').value;
+            const nextDose = document.getElementById('nextDose').value;
+            
+            if (medName && dosage && nextDose) {
+                alert(`Medication "${medName}" (${dosage}) scheduled for ${nextDose} (${frequency})`);
+                
+                // Update the demo UI
+                document.getElementById('doseCount').textContent = '3 doses today';
+                document.getElementById('medProgress').style.width = '85%';
+                
+                // Close the form
+                document.getElementById('medicationFeature').classList.remove('active');
+            } else {
+                alert('Please fill all fields');
+            }
+        });
+        
+        // Hydration Tracking
+        document.getElementById('saveHydration').addEventListener('click', function() {
+            const waterIntake = parseInt(document.getElementById('waterIntake').value) || 0;
+            const dailyGoal = parseInt(document.getElementById('dailyGoal').value) || 1500;
+            
+            if (waterIntake > 0) {
+                const progress = Math.min(100, (waterIntake / dailyGoal) * 100);
+                const litersIntake = (waterIntake / 1000).toFixed(1);
+                const litersGoal = (dailyGoal / 1000).toFixed(1);
+                
+                document.getElementById('hydrationProgressBar').style.width = `${progress}%`;
+                document.getElementById('hydrationStatus').textContent = `${litersIntake}L / ${litersGoal}L`;
+                
+                // Update the demo UI
+                document.getElementById('waterAmount').textContent = `${litersIntake}L / ${litersGoal}L`;
+                document.getElementById('waterProgress').style.width = `${progress}%`;
+                
+                // Close the form
+                document.getElementById('hydrationFeature').classList.remove('active');
+            } else {
+                alert('Please enter a valid water intake amount');
+            }
+        });
+        
+        // Demo UI Interactions
+        document.getElementById('medicationDemo').addEventListener('click', function() {
+            document.querySelector('[data-feature="medication"]').click();
+        });
+        
+        document.getElementById('hydrationDemo').addEventListener('click', function() {
+            document.querySelector('[data-feature="hydration"]').click();
+        });
+        
+        // Pricing Plan Selection
         document.querySelectorAll('.pricing-card .cta-button').forEach(button => {
             button.addEventListener('click', function() {
                 if (this.textContent.includes('PRO')) {
-                    alert('Συγχαρητήρια! Αγοράσατε την Pro έκδοση για $10/μήνα. Όλες οι λειτουργίες είναι τώρα ενεργοποιημένες!');
+                    alert('Congratulations! You purchased the Pro version for $10/month. All features are now unlocked!');
+                    
+                    // Enable all features
+                    document.querySelectorAll('.feature-action').forEach(action => {
+                        action.style.background = 'var(--success)';
+                    });
                 } else {
-                    alert('Ξεκινάτε με το Δωρεάν Πλάνο. Αναβαθμίστε στην Pro έκδοση για πρόσβαση σε όλες τις λειτουργίες!');
+                    alert('Starting with Free Plan. Upgrade to Pro version for access to all features!');
                 }
             });
         });
@@ -1032,16 +1365,8 @@
         // Free Training Button
         document.querySelector('.training .cta-button').addEventListener('click', function(e) {
             e.preventDefault();
-            alert('Ανακατεύθυνση στην σελίδα δωρεάν εκπαίδευσης σκύλων. Σε πραγματική εφαρμογή, αυτό θα ανοίγει το λινκ: https://tinyurl.com/dogtrainingfreee');
+            alert('Redirecting to free dog training page. In a real application, this would open: https://tinyurl.com/dogtrainingfreee');
             window.location.href = 'https://tinyurl.com/dogtrainingfreee';
-        });
-        
-        // Demo for feature cards
-        document.querySelectorAll('.feature-card').forEach(card => {
-            card.addEventListener('click', function() {
-                const title = this.querySelector('h3').textContent;
-                alert(`Λειτουργία "${title}" ενεργοποιημένη! Στην πλήρη έκδοση, αυτό θα ανοίξει την αντίστοιχη οθόνη διαχείρισης.`);
-            });
         });
         
         // Simulate PWA installation prompt
@@ -1053,6 +1378,28 @@
             // Show the install button
             document.getElementById('installButton').style.display = 'flex';
         });
+        
+        // Initialize demo values
+        let medDoses = 2;
+        let waterIntake = 1200;
+        const waterGoal = 1500;
+        
+        setInterval(() => {
+            // Simulate adding a medication dose
+            if (medDoses < 3 && Math.random() > 0.8) {
+                medDoses++;
+                document.getElementById('doseCount').textContent = `${medDoses} doses today`;
+                document.getElementById('medProgress').style.width = `${(medDoses/3)*100}%`;
+            }
+            
+            // Simulate drinking water
+            if (waterIntake < waterGoal && Math.random() > 0.7) {
+                waterIntake += 100;
+                const progress = (waterIntake / waterGoal) * 100;
+                document.getElementById('waterAmount').textContent = `${(waterIntake/1000).toFixed(1)}L / ${(waterGoal/1000).toFixed(1)}L`;
+                document.getElementById('waterProgress').style.width = `${progress}%`;
+            }
+        }, 5000);
     </script>
 </body>
 </html>
