@@ -6,6 +6,9 @@
     <title>Pro Pet Health Companion</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#4e54c8">
+    <link rel="apple-touch-icon" href="icon-152x152.png">
     <style>
         :root {
             --primary: #4e54c8;
@@ -17,6 +20,7 @@
             --info: #17a2b8;
             --radius: 10px;
             --shadow: 0 5px 15px rgba(0,0,0,0.1);
+            --gradient: linear-gradient(135deg, #4e54c8, #8f94fb);
         }
         
         * {
@@ -32,6 +36,7 @@
             background: #f0f2f5;
             overflow-x: hidden;
             padding-top: 20px;
+            background: var(--light);
         }
         
         .container {
@@ -51,6 +56,7 @@
             z-index: 100;
             border-radius: var(--radius);
             margin-bottom: 30px;
+            background: var(--gradient);
         }
         
         .header-content {
@@ -70,13 +76,14 @@
             height: 50px;
             border-radius: 50%;
             object-fit: cover;
-            border: 2px solid var(--primary);
+            border: 2px solid white;
         }
         
         .logo h1 {
             font-size: 1.8rem;
             font-weight: 700;
-            color: var(--primary);
+            color: white;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         
         nav ul {
@@ -87,36 +94,68 @@
         
         nav ul li a {
             text-decoration: none;
-            color: var(--dark);
+            color: white;
             font-weight: 500;
             display: flex;
             align-items: center;
             gap: 8px;
             transition: all 0.3s ease;
             position: relative;
+            padding: 8px 12px;
+            border-radius: 30px;
+            background: rgba(255,255,255,0.2);
         }
         
         nav ul li a:hover {
-            color: var(--primary);
-        }
-        
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary);
-            transition: width 0.3s ease;
-        }
-        
-        nav ul li a:hover::after {
-            width: 100%;
+            background: rgba(255,255,255,0.3);
         }
         
         nav ul li a i {
             font-size: 1.1rem;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: var(--gradient);
+            border-radius: var(--radius);
+            padding: 60px 30px;
+            margin-bottom: 40px;
+            color: white;
+            text-align: center;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: cover;
+            z-index: 1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .hero h2 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
         }
         
         /* Features Section */
@@ -159,6 +198,8 @@
             transition: all 0.4s ease;
             border: 1px solid #eaeaea;
             cursor: pointer;
+            position: relative;
+            border-top: 4px solid var(--primary);
         }
         
         .feature-card:hover {
@@ -214,12 +255,14 @@
             display: inline-block;
             background: var(--primary);
             color: white;
-            padding: 8px 20px;
+            padding: 10px 25px;
             border-radius: 30px;
-            font-size: 0.9rem;
+            font-size: 1rem;
             font-weight: 500;
             cursor: pointer;
             transition: all 0.3s ease;
+            text-decoration: none;
+            border: none;
         }
         
         .feature-action:hover {
@@ -236,6 +279,7 @@
             box-shadow: var(--shadow);
             display: none;
             border: 2px solid var(--primary);
+            position: relative;
         }
         
         .feature-panel.active {
@@ -451,6 +495,121 @@
             display: block;
         }
         
+        /* Training Section */
+        .training-section {
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            border-radius: var(--radius);
+            padding: 40px;
+            margin: 40px 0;
+            text-align: center;
+            color: white;
+            box-shadow: var(--shadow);
+        }
+        
+        .training-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .training-content h3 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+        }
+        
+        .training-content p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        /* Pet Gallery */
+        .pet-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+        
+        .pet-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 20px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+        
+        .pet-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .pet-card img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border: 2px solid var(--primary);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 40px 0;
+            margin-top: 60px;
+            border-top-left-radius: var(--radius);
+            border-top-right-radius: var(--radius);
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--primary);
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-section ul li a {
+            color: #bbb;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-section ul li a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 30px;
+            border-top: 1px solid #444;
+            color: #bbb;
+        }
+        
         /* Responsive Design */
         @media (max-width: 992px) {
             .header-content {
@@ -462,6 +621,10 @@
                 flex-wrap: wrap;
                 justify-content: center;
             }
+            
+            .hero h2 {
+                font-size: 2.2rem;
+            }
         }
         
         @media (max-width: 768px) {
@@ -472,11 +635,36 @@
             .medication-form {
                 grid-template-columns: 1fr;
             }
+            
+            .hero {
+                padding: 40px 20px;
+            }
+            
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .training-section {
+                padding: 30px 20px;
+            }
         }
         
         @media (max-width: 576px) {
             .section-title {
-                font-size: 2rem;
+                font-size: 1.8rem;
+            }
+            
+            nav ul {
+                gap: 10px;
+            }
+            
+            nav ul li a {
+                padding: 6px 10px;
+                font-size: 0.9rem;
             }
         }
         
@@ -556,6 +744,42 @@
         .pwa-steps li {
             margin-bottom: 8px;
         }
+        
+        /* Hamburger Menu */
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            nav {
+                position: fixed;
+                top: 90px;
+                left: 0;
+                width: 100%;
+                background: var(--gradient);
+                padding: 20px;
+                transform: translateY(-150%);
+                transition: transform 0.4s ease;
+                z-index: 99;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+            }
+            
+            nav.active {
+                transform: translateY(0);
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -596,15 +820,29 @@
                     </div>
                     <h1>Pro Pet Health</h1>
                 </div>
-                <nav>
+                <div class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <nav id="nav">
                     <ul>
                         <li><a href="#features"><i class="fas fa-paw"></i> Features</a></li>
                         <li><a href="#training"><i class="fas fa-graduation-cap"></i> Training</a></li>
+                        <li><a href="#medication"><i class="fas fa-pills"></i> Medication</a></li>
+                        <li><a href="#symptoms"><i class="fas fa-stethoscope"></i> Symptoms</a></li>
                     </ul>
                 </nav>
             </div>
         </div>
     </header>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Your Pet's Health Companion</h2>
+            <p>Track hydration, medications, and symptoms all in one place for your furry friends</p>
+            <a href="#features" class="feature-action">Explore Features</a>
+        </div>
+    </section>
     
     <!-- Features Section -->
     <section class="features" id="features">
@@ -803,24 +1041,77 @@
     </section>
     
     <!-- Training Section -->
-    <section class="features" id="training">
-        <div class="container">
-            <div class="feature-panel">
-                <div class="panel-header">
-                    <h3><i class="fas fa-graduation-cap"></i> Free Dog Training Course</h3>
-                </div>
-                
-                <div class="pet-avatar">
-                    <i class="fas fa-dog"></i>
-                </div>
-                
-                <p>As a special bonus for our users, we're offering a comprehensive dog training course at no extra cost.</p>
-                <a href="https://tinyurl.com/dogtrainingfreee" class="submit-btn" target="_blank" style="text-decoration: none; display: inline-block; margin-top: 20px;">
-                    <i class="fas fa-graduation-cap"></i> Access Free Training
-                </a>
+    <section class="training-section" id="training">
+        <div class="training-content">
+            <h3><i class="fas fa-graduation-cap"></i> Free Dog Training Course</h3>
+            <p>As a special bonus for our users, we're offering a comprehensive dog training course at no extra cost. Learn professional techniques to train your dog effectively!</p>
+            <a href="https://tinyurl.com/dogtrainingfreee" class="submit-btn" target="_blank" style="text-decoration: none; display: inline-block;">
+                <i class="fas fa-graduation-cap"></i> Access Free Training
+            </a>
+        </div>
+    </section>
+    
+    <!-- Pet Gallery -->
+    <section class="container">
+        <h2 class="section-title">Happy Pet Owners</h2>
+        <div class="pet-gallery">
+            <div class="pet-card">
+                <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?auto=format&fit=crop&w=200&h=200" alt="Golden Retriever">
+                <h4>Max</h4>
+                <p>Golden Retriever</p>
+            </div>
+            <div class="pet-card">
+                <img src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=200&h=200" alt="Siamese Cat">
+                <h4>Luna</h4>
+                <p>Siamese Cat</p>
+            </div>
+            <div class="pet-card">
+                <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=200&h=200" alt="German Shepherd">
+                <h4>Rocky</h4>
+                <p>German Shepherd</p>
+            </div>
+            <div class="pet-card">
+                <img src="https://images.unsplash.com/photo-1533738363-b7f9aef128ce?auto=format&fit=crop&w=200&h=200" alt="Persian Cat">
+                <h4>Mittens</h4>
+                <p>Persian Cat</p>
             </div>
         </div>
     </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Pro Pet Health</h3>
+                    <p>Your companion for pet health and wellness. Track medications, hydration, and symptoms all in one place.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#training">Training Course</a></li>
+                        <li><a href="#medication">Medication Tracker</a></li>
+                        <li><a href="#symptoms">Symptom Checker</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> info@propethealth.com</li>
+                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Pet Care Ave, Pet City</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Pro Pet Health Companion. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
     
     <script>
         // Install Button Functionality
@@ -1053,6 +1344,31 @@
                 notification.classList.remove('show');
             }, 5000);
         }, 300000); // Every 5 minutes
+        
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const nav = document.getElementById('nav');
+        
+        menuToggle.addEventListener('click', () => {
+            nav.classList.toggle('active');
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    nav.classList.remove('active');
+                }
+            });
+        });
     </script>
 </body>
 </html>
