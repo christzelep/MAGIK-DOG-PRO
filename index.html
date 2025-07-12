@@ -6,6 +6,7 @@
     <title>Pro Pet Health Companion</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="manifest" href="/manifest.json">
     <style>
         :root {
             --primary: #4e54c8;
@@ -14,6 +15,7 @@
             --light: #f8f9fa;
             --success: #28a745;
             --warning: #ffc107;
+            --info: #17a2b8;
             --radius: 10px;
             --shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
@@ -228,6 +230,7 @@
             box-shadow: var(--shadow);
             transition: all 0.4s ease;
             border: 1px solid #eaeaea;
+            cursor: pointer;
         }
         
         .feature-card:hover {
@@ -370,94 +373,6 @@
         .status.completed {
             background: #d4edda;
             color: #155724;
-        }
-        
-        /* Pricing Section */
-        .pricing {
-            padding: 100px 0;
-            background: #f8f9fa;
-        }
-        
-        .pricing-cards {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 50px;
-        }
-        
-        .pricing-card {
-            background: white;
-            border-radius: var(--radius);
-            padding: 40px 30px;
-            box-shadow: var(--shadow);
-            width: 100%;
-            max-width: 380px;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            transition: all 0.3s ease;
-        }
-        
-        .pricing-card:hover {
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-        }
-        
-        .pricing-card.pro-card {
-            border: 2px solid var(--primary);
-            transform: scale(1.05);
-            z-index: 2;
-        }
-        
-        .pro-badge {
-            position: absolute;
-            top: -15px;
-            right: 20px;
-            background: var(--primary);
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-        
-        .pricing-card h3 {
-            font-size: 1.6rem;
-            margin-bottom: 20px;
-            color: var(--dark);
-        }
-        
-        .price {
-            font-size: 3rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 30px;
-        }
-        
-        .price span {
-            font-size: 1rem;
-            color: #777;
-            font-weight: 500;
-        }
-        
-        .pricing-features {
-            list-style: none;
-            margin-bottom: 30px;
-            flex-grow: 1;
-        }
-        
-        .pricing-features li {
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .pricing-features li i.fa-check {
-            color: var(--success);
-        }
-        
-        .pricing-features li i.fa-times {
-            color: #ccc;
         }
         
         /* Training Section */
@@ -688,15 +603,6 @@
         }
         
         @media (max-width: 768px) {
-            .pricing-cards {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .pro-card {
-                transform: scale(1);
-            }
-            
             .features-grid, .testimonial-grid {
                 grid-template-columns: 1fr;
             }
@@ -775,17 +681,17 @@
             transform: translateY(-3px);
         }
         
-        /* Interactive UI */
-        .interactive-feature {
+        /* Feature Panels */
+        .feature-panel {
             background: white;
             border-radius: var(--radius);
-            padding: 25px;
-            margin-top: 30px;
+            padding: 30px;
+            margin: 30px 0;
             box-shadow: var(--shadow);
             display: none;
         }
         
-        .interactive-feature.active {
+        .feature-panel.active {
             display: block;
             animation: fadeIn 0.5s ease;
         }
@@ -795,40 +701,266 @@
             to { opacity: 1; transform: translateY(0); }
         }
         
-        .medication-form, .hydration-form {
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .close-panel {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #777;
+            transition: color 0.3s ease;
+        }
+        
+        .close-panel:hover {
+            color: var(--accent);
+        }
+        
+        /* Symptom Checker Styles */
+        .symptoms-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .symptom-item {
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .symptom-item:hover {
+            background: #e9ecef;
+        }
+        
+        .symptom-item.selected {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .result-card {
+            background: var(--light);
+            border-radius: var(--radius);
+            padding: 20px;
+            margin-top: 20px;
+            display: none;
+        }
+        
+        .result-card h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        /* Vet Locator Styles */
+        .vet-map {
+            height: 400px;
+            background: #e9ecef;
+            border-radius: var(--radius);
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .map-overlay {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            background: white;
+            padding: 15px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            z-index: 10;
+        }
+        
+        .vet-list {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-top: 20px;
+        }
+        
+        .vet-item {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .vet-item:hover {
+            background: #f8f9fa;
+        }
+        
+        .vet-item h4 {
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        
+        /* Vaccination Tracker Styles */
+        .vaccination-form {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 20px;
             margin-bottom: 20px;
         }
         
-        .form-group {
+        .vaccination-list {
+            margin-top: 30px;
+        }
+        
+        .vaccination-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .vaccination-status {
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        /* Diet Plan Styles */
+        .diet-plan {
+            background: white;
+            border-radius: var(--radius);
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: var(--shadow);
+        }
+        
+        .diet-plan h3 {
+            color: var(--primary);
             margin-bottom: 15px;
+        }
+        
+        .meal-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        /* Health History Styles */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 40px auto;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background-color: var(--primary);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1px;
+        }
+        
+        .timeline-item {
+            position: relative;
+            width: 50%;
+            padding: 10px 30px;
+            box-sizing: border-box;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            border: 4px solid var(--primary);
+            border-radius: 50%;
+            top: 15px;
+            z-index: 1;
+        }
+        
+        .left {
+            left: 0;
+        }
+        
+        .right {
+            left: 50%;
+        }
+        
+        .left::after {
+            right: -10px;
+        }
+        
+        .right::after {
+            left: -10px;
+        }
+        
+        .timeline-content {
+            background: white;
+            border-radius: var(--radius);
+            padding: 20px;
+            box-shadow: var(--shadow);
+        }
+        
+        .timeline-date {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        
+        /* Form Elements */
+        .form-group {
+            margin-bottom: 20px;
         }
         
         .form-group label {
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
             font-weight: 500;
+            color: var(--dark);
         }
         
-        .form-group input, .form-group select {
+        .form-group input, 
+        .form-group select, 
+        .form-group textarea {
             width: 100%;
-            padding: 10px 15px;
+            padding: 12px 15px;
             border: 1px solid #ddd;
             border-radius: var(--radius);
             font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+        }
+        
+        .form-group input:focus, 
+        .form-group select:focus, 
+        .form-group textarea:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(78, 84, 200, 0.2);
         }
         
         .submit-btn {
             background: var(--primary);
             color: white;
             border: none;
-            padding: 12px 25px;
+            padding: 12px 30px;
             border-radius: var(--radius);
             cursor: pointer;
             font-weight: 600;
+            font-size: 1rem;
             transition: all 0.3s ease;
+            display: inline-block;
         }
         
         .submit-btn:hover {
@@ -836,19 +968,12 @@
             transform: translateY(-2px);
         }
         
-        .pet-avatar {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            margin: 0 auto 20px;
-            overflow: hidden;
-            border: 3px solid var(--primary);
+        .btn-secondary {
+            background: #6c757d;
         }
         
-        .pet-avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        .btn-secondary:hover {
+            background: #5a6268;
         }
     </style>
 </head>
@@ -878,7 +1003,6 @@
                 <nav>
                     <ul>
                         <li><a href="#features"><i class="fas fa-paw"></i> Features</a></li>
-                        <li><a href="#pricing"><i class="fas fa-tag"></i> Pricing</a></li>
                         <li><a href="#training"><i class="fas fa-graduation-cap"></i> Training</a></li>
                         <li><a href="#testimonials"><i class="fas fa-comments"></i> Testimonials</a></li>
                     </ul>
@@ -892,7 +1016,7 @@
         <div class="container">
             <div class="hero-content">
                 <h2>Ultimate Health Companion for Your Pet</h2>
-                <p>Professional pet care management with all the features you need in one place</p>
+                <p>Professional pet care management with all features included in the PRO version</p>
                 <button class="cta-button" id="getStarted">
                     <i class="fas fa-rocket"></i> Get Started Now
                 </button>
@@ -903,7 +1027,7 @@
     <!-- Features Section -->
     <section class="features" id="features">
         <div class="container">
-            <h2 class="section-title">Pro Features</h2>
+            <h2 class="section-title">PRO Features</h2>
             
             <div class="demo-ui">
                 <div class="demo-element" id="medicationDemo">
@@ -935,87 +1059,9 @@
                 </div>
             </div>
             
-            <!-- Interactive Medication Feature -->
-            <div class="interactive-feature" id="medicationFeature">
-                <h3><i class="fas fa-pills"></i> Medication Tracker</h3>
-                <div class="pet-avatar">
-                    <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Pet Avatar">
-                </div>
-                <form class="medication-form">
-                    <div class="form-group">
-                        <label for="medicationName">Medication Name</label>
-                        <input type="text" id="medicationName" placeholder="Enter medication name">
-                    </div>
-                    <div class="form-group">
-                        <label for="dosage">Dosage</label>
-                        <input type="text" id="dosage" placeholder="e.g. 10mg">
-                    </div>
-                    <div class="form-group">
-                        <label for="frequency">Frequency</label>
-                        <select id="frequency">
-                            <option value="daily">Daily</option>
-                            <option value="twice">Twice a day</option>
-                            <option value="weekly">Weekly</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="nextDose">Next Dose Time</label>
-                        <input type="time" id="nextDose">
-                    </div>
-                    <button type="button" class="submit-btn" id="saveMedication">Save Medication</button>
-                </form>
-            </div>
-            
-            <!-- Interactive Hydration Feature -->
-            <div class="interactive-feature" id="hydrationFeature">
-                <h3><i class="fas fa-tint"></i> Hydration Tracker</h3>
-                <div class="pet-avatar">
-                    <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Pet Avatar">
-                </div>
-                <form class="hydration-form">
-                    <div class="form-group">
-                        <label for="waterIntake">Water Intake (ml)</label>
-                        <input type="number" id="waterIntake" placeholder="Enter amount">
-                    </div>
-                    <div class="form-group">
-                        <label for="dailyGoal">Daily Goal (ml)</label>
-                        <input type="number" id="dailyGoal" value="1500">
-                    </div>
-                    <button type="button" class="submit-btn" id="saveHydration">Save Hydration</button>
-                </form>
-                <div class="progress-bar" style="margin-top: 20px;">
-                    <div class="progress" id="hydrationProgressBar" style="width: 80%"></div>
-                </div>
-                <p id="hydrationStatus" style="text-align: center; margin-top: 10px;">1.2L / 1.5L</p>
-            </div>
-            
             <div class="features-grid">
-                <!-- Medication Tracker -->
-                <div class="feature-card" data-feature="medication">
-                    <div class="feature-img">
-                        <img src="https://images.unsplash.com/photo-1582481725274-d63d1d67a9d6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Medication Tracker">
-                    </div>
-                    <div class="feature-content">
-                        <h3><div class="icon"><i class="fas fa-pills"></i></div> Medication Tracker</h3>
-                        <p>Never miss a dose with our advanced medication scheduling system. Receive notifications and track medication history.</p>
-                        <div class="feature-action">Track Medication</div>
-                    </div>
-                </div>
-                
-                <!-- Dog Hydration -->
-                <div class="feature-card" data-feature="hydration">
-                    <div class="feature-img">
-                        <img src="https://images.unsplash.com/photo-1560807707-8cc77767d783?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Dog Hydration">
-                    </div>
-                    <div class="feature-content">
-                        <h3><div class="icon"><i class="fas fa-tint"></i></div> Dog Hydration</h3>
-                        <p>Monitor your dog's water intake and ensure proper hydration with daily tracking and reminders.</p>
-                        <div class="feature-action">Track Hydration</div>
-                    </div>
-                </div>
-                
                 <!-- Health Symptom Checker -->
-                <div class="feature-card">
+                <div class="feature-card" data-feature="symptom">
                     <div class="feature-img">
                         <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Health Symptom Checker">
                     </div>
@@ -1027,7 +1073,7 @@
                 </div>
                 
                 <!-- Emergency Vet Locator -->
-                <div class="feature-card">
+                <div class="feature-card" data-feature="vet">
                     <div class="feature-img">
                         <img src="https://images.unsplash.com/photo-1583339793403-3b8a156443ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Emergency Vet Locator">
                     </div>
@@ -1039,7 +1085,7 @@
                 </div>
                 
                 <!-- Vaccination Tracker -->
-                <div class="feature-card">
+                <div class="feature-card" data-feature="vaccination">
                     <div class="feature-img">
                         <img src="https://images.unsplash.com/photo-1575425186775-b8de9a427e67?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Vaccination Tracker">
                     </div>
@@ -1051,7 +1097,7 @@
                 </div>
                 
                 <!-- Personalized Diet Plans -->
-                <div class="feature-card">
+                <div class="feature-card" data-feature="diet">
                     <div class="feature-img">
                         <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Personalized Diet Plans">
                     </div>
@@ -1063,7 +1109,7 @@
                 </div>
                 
                 <!-- Health History Log -->
-                <div class="feature-card">
+                <div class="feature-card" data-feature="history">
                     <div class="feature-img">
                         <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Health History Log">
                     </div>
@@ -1074,48 +1120,271 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-    
-    <!-- Pricing Section -->
-    <section class="pricing" id="pricing">
-        <div class="container">
-            <h2 class="section-title">Premium Pricing</h2>
             
-            <div class="pricing-cards">
-                <!-- Basic Plan -->
-                <div class="pricing-card">
-                    <h3>Basic Plan</h3>
-                    <div class="price">$0<span>/month</span></div>
-                    <ul class="pricing-features">
-                        <li><i class="fas fa-check"></i> Medication Tracker</li>
-                        <li><i class="fas fa-check"></i> Hydration Monitor</li>
-                        <li><i class="fas fa-times"></i> Symptom Checker</li>
-                        <li><i class="fas fa-times"></i> Vet Locator</li>
-                        <li><i class="fas fa-times"></i> Vaccination Tracker</li>
-                        <li><i class="fas fa-times"></i> Diet Plans</li>
-                        <li><i class="fas fa-times"></i> Health History</li>
-                    </ul>
-                    <button class="cta-button">Get Basic</button>
+            <!-- Symptom Checker Panel -->
+            <div class="feature-panel" id="symptomPanel">
+                <div class="panel-header">
+                    <h3><i class="fas fa-stethoscope"></i> Health Symptom Checker</h3>
+                    <button class="close-panel">&times;</button>
                 </div>
                 
-                <!-- PRO Plan -->
-                <div class="pricing-card pro-card">
-                    <div class="pro-badge">RECOMMENDED</div>
-                    <h3>PRO Plan</h3>
-                    <div class="price">$10<span>/month</span></div>
-                    <ul class="pricing-features">
-                        <li><i class="fas fa-check"></i> Medication Tracker</li>
-                        <li><i class="fas fa-check"></i> Hydration Monitor</li>
-                        <li><i class="fas fa-check"></i> Symptom Checker</li>
-                        <li><i class="fas fa-check"></i> Vet Locator</li>
-                        <li><i class="fas fa-check"></i> Vaccination Tracker</li>
-                        <li><i class="fas fa-check"></i> Diet Plans</li>
-                        <li><i class="fas fa-check"></i> Health History</li>
-                        <li><i class="fas fa-check"></i> Priority Support</li>
-                        <li><i class="fas fa-check"></i> Unlimited Pets</li>
-                    </ul>
-                    <button class="cta-button">Get PRO Version</button>
+                <div class="form-group">
+                    <label>Select your pet's symptoms:</label>
+                    <div class="symptoms-container">
+                        <div class="symptom-item" data-symptom="lethargy">Lethargy</div>
+                        <div class="symptom-item" data-symptom="vomiting">Vomiting</div>
+                        <div class="symptom-item" data-symptom="diarrhea">Diarrhea</div>
+                        <div class="symptom-item" data-symptom="coughing">Coughing</div>
+                        <div class="symptom-item" data-symptom="sneezing">Sneezing</div>
+                        <div class="symptom-item" data-symptom="limping">Limping</div>
+                        <div class="symptom-item" data-symptom="itching">Itching</div>
+                        <div class="symptom-item" data-symptom="appetite">Loss of Appetite</div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="symptomDuration">Duration of Symptoms</label>
+                    <select id="symptomDuration">
+                        <option value="">Select duration</option>
+                        <option value="less24">Less than 24 hours</option>
+                        <option value="1-3">1-3 days</option>
+                        <option value="4-7">4-7 days</option>
+                        <option value="over7">Over 7 days</option>
+                    </select>
+                </div>
+                
+                <button class="submit-btn" id="analyzeSymptoms">Analyze Symptoms</button>
+                
+                <div class="result-card" id="symptomResult">
+                    <h3>Analysis Results</h3>
+                    <p id="diagnosisText">Based on the symptoms you've selected, our analysis indicates:</p>
+                    <div id="recommendations"></div>
+                    <button class="submit-btn btn-secondary" id="saveAnalysis">Save to Health History</button>
+                </div>
+            </div>
+            
+            <!-- Vet Locator Panel -->
+            <div class="feature-panel" id="vetPanel">
+                <div class="panel-header">
+                    <h3><i class="fas fa-ambulance"></i> Emergency Vet Locator</h3>
+                    <button class="close-panel">&times;</button>
+                </div>
+                
+                <div class="form-group">
+                    <label for="locationInput">Enter your location or zip code:</label>
+                    <input type="text" id="locationInput" placeholder="e.g. New York, NY or 10001">
+                </div>
+                
+                <button class="submit-btn" id="findVets">Find Nearby Vets</button>
+                
+                <div class="vet-map">
+                    <div class="map-overlay">
+                        <h4>Veterinary Clinics Near You</h4>
+                        <p>Showing results for: <span id="locationDisplay">New York, NY</span></p>
+                    </div>
+                    <!-- Map would be integrated with Google Maps API in a real app -->
+                </div>
+                
+                <div class="vet-list">
+                    <div class="vet-item">
+                        <h4>City Animal Hospital</h4>
+                        <p><i class="fas fa-map-marker-alt"></i> 123 Main St, New York, NY</p>
+                        <p><i class="fas fa-phone"></i> (212) 555-1234</p>
+                        <p><i class="fas fa-star"></i> 4.7 (128 reviews)</p>
+                        <p><i class="fas fa-clock"></i> Open 24 hours</p>
+                    </div>
+                    <div class="vet-item">
+                        <h4>Central Park Veterinary</h4>
+                        <p><i class="fas fa-map-marker-alt"></i> 456 Central Park West, New York, NY</p>
+                        <p><i class="fas fa-phone"></i> (212) 555-5678</p>
+                        <p><i class="fas fa-star"></i> 4.9 (94 reviews)</p>
+                        <p><i class="fas fa-clock"></i> Open until 10 PM</p>
+                    </div>
+                    <div class="vet-item">
+                        <h4>Emergency Pet Care</h4>
+                        <p><i class="fas fa-map-marker-alt"></i> 789 Broadway, New York, NY</p>
+                        <p><i class="fas fa-phone"></i> (212) 555-9012</p>
+                        <p><i class="fas fa-star"></i> 4.5 (201 reviews)</p>
+                        <p><i class="fas fa-clock"></i> Open 24 hours</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Vaccination Tracker Panel -->
+            <div class="feature-panel" id="vaccinationPanel">
+                <div class="panel-header">
+                    <h3><i class="fas fa-syringe"></i> Vaccination Tracker</h3>
+                    <button class="close-panel">&times;</button>
+                </div>
+                
+                <form class="vaccination-form">
+                    <div class="form-group">
+                        <label for="vaccineName">Vaccine Name</label>
+                        <select id="vaccineName">
+                            <option value="">Select vaccine</option>
+                            <option value="rabies">Rabies</option>
+                            <option value="distemper">Distemper</option>
+                            <option value="parvo">Parvovirus</option>
+                            <option value="lepto">Leptospirosis</option>
+                            <option value="bordetella">Bordetella</option>
+                            <option value="lyme">Lyme Disease</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="vaccineDate">Date Administered</label>
+                        <input type="date" id="vaccineDate">
+                    </div>
+                    <div class="form-group">
+                        <label for="nextDue">Next Due Date</label>
+                        <input type="date" id="nextDue">
+                    </div>
+                    <div class="form-group">
+                        <label for="vetName">Veterinarian</label>
+                        <input type="text" id="vetName" placeholder="Vet's name">
+                    </div>
+                </form>
+                
+                <button class="submit-btn" id="saveVaccination">Save Vaccination Record</button>
+                
+                <div class="vaccination-list">
+                    <h3>Vaccination Records</h3>
+                    <div class="vaccination-item">
+                        <div>
+                            <h4>Rabies Vaccine</h4>
+                            <p>Administered: May 15, 2023</p>
+                            <p>Vet: Dr. Sarah Johnson</p>
+                        </div>
+                        <div>
+                            <div class="status upcoming">Due: June 15, 2024</div>
+                        </div>
+                    </div>
+                    <div class="vaccination-item">
+                        <div>
+                            <h4>Distemper/Parvo Combo</h4>
+                            <p>Administered: April 10, 2023</p>
+                            <p>Vet: Central Animal Hospital</p>
+                        </div>
+                        <div>
+                            <div class="status completed">Completed</div>
+                        </div>
+                    </div>
+                    <div class="vaccination-item">
+                        <div>
+                            <h4>Bordetella</h4>
+                            <p>Administered: March 22, 2023</p>
+                            <p>Vet: Dr. Michael Chen</p>
+                        </div>
+                        <div>
+                            <div class="status completed">Completed</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Diet Plan Panel -->
+            <div class="feature-panel" id="dietPanel">
+                <div class="panel-header">
+                    <h3><i class="fas fa-utensils"></i> Personalized Diet Plan</h3>
+                    <button class="close-panel">&times;</button>
+                </div>
+                
+                <div class="diet-plan">
+                    <h3>Charlie's Custom Nutrition Plan</h3>
+                    <p>Golden Retriever, 4 years old, 65 lbs</p>
+                    
+                    <div class="form-group">
+                        <label>Daily Calorie Target: 1200 kcal</label>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 75%; background: var(--info);"></div>
+                        </div>
+                        <p>Today's intake: 900 kcal</p>
+                    </div>
+                    
+                    <h4>Today's Meal Plan</h4>
+                    <div class="meal-item">
+                        <span>Breakfast (8:00 AM)</span>
+                        <span>1.5 cups Premium Dog Food</span>
+                    </div>
+                    <div class="meal-item">
+                        <span>Lunch (1:00 PM)</span>
+                        <span>1 cup Lean Chicken & Vegetables</span>
+                    </div>
+                    <div class="meal-item">
+                        <span>Dinner (6:00 PM)</span>
+                        <span>1.5 cups Premium Dog Food</span>
+                    </div>
+                    <div class="meal-item">
+                        <span>Treats</span>
+                        <span>2 Dental Chews (50 kcal)</span>
+                    </div>
+                </div>
+                
+                <button class="submit-btn">Generate New Plan</button>
+                <button class="submit-btn btn-secondary">Save as PDF</button>
+            </div>
+            
+            <!-- Health History Panel -->
+            <div class="feature-panel" id="historyPanel">
+                <div class="panel-header">
+                    <h3><i class="fas fa-clipboard-list"></i> Health History Log</h3>
+                    <button class="close-panel">&times;</button>
+                </div>
+                
+                <div class="form-group">
+                    <label for="eventDate">Event Date</label>
+                    <input type="date" id="eventDate">
+                </div>
+                
+                <div class="form-group">
+                    <label for="eventType">Event Type</label>
+                    <select id="eventType">
+                        <option value="">Select type</option>
+                        <option value="vet">Vet Visit</option>
+                        <option value="medication">Medication</option>
+                        <option value="symptom">Symptom/Observation</option>
+                        <option value="vaccine">Vaccination</option>
+                        <option value="procedure">Medical Procedure</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="eventDescription">Description</label>
+                    <textarea id="eventDescription" rows="3" placeholder="Describe the event..."></textarea>
+                </div>
+                
+                <button class="submit-btn" id="saveEvent">Add to Health History</button>
+                
+                <div class="timeline">
+                    <h3 style="text-align: center; margin: 30px 0;">Health History Timeline</h3>
+                    <div class="timeline-item left">
+                        <div class="timeline-content">
+                            <div class="timeline-date">June 10, 2023</div>
+                            <h4>Annual Checkup</h4>
+                            <p>Routine checkup at Central Animal Hospital. Received clean bill of health.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item right">
+                        <div class="timeline-content">
+                            <div class="timeline-date">May 15, 2023</div>
+                            <h4>Rabies Vaccination</h4>
+                            <p>Administered by Dr. Johnson. Next due June 2024.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item left">
+                        <div class="timeline-content">
+                            <div class="timeline-date">April 22, 2023</div>
+                            <h4>Minor Skin Irritation</h4>
+                            <p>Noticed itching and redness on belly. Applied topical ointment for 3 days.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item right">
+                        <div class="timeline-content">
+                            <div class="timeline-date">March 10, 2023</div>
+                            <h4>Dental Cleaning</h4>
+                            <p>Professional dental cleaning under anesthesia. No extractions needed.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1248,13 +1517,24 @@
     <script>
         // Install Button Functionality
         document.getElementById('installButton').addEventListener('click', async () => {
-            // In a real PWA, this would trigger the installation prompt
-            alert('The app will be installed on your device. In a real application, this would trigger the PWA installation.');
+            // Simulate PWA installation
+            const installButton = document.getElementById('installButton');
+            installButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Installing...';
             
-            // Simulate installation
-            document.getElementById('installButton').innerHTML = '<i class="fas fa-check"></i> Installed';
-            document.getElementById('installButton').style.background = 'var(--success)';
-            document.getElementById('installButton').disabled = true;
+            setTimeout(() => {
+                installButton.innerHTML = '<i class="fas fa-check"></i> Installed';
+                installButton.style.background = 'var(--success)';
+                installButton.disabled = true;
+                
+                // Show notification
+                const notification = document.getElementById('notification');
+                notification.querySelector('p').textContent = 'Pro Pet Health Companion installed successfully!';
+                notification.classList.add('show');
+                
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 5000);
+            }, 2000);
         });
         
         // Notification Demo
@@ -1272,111 +1552,148 @@
             card.addEventListener('click', function() {
                 const feature = this.getAttribute('data-feature');
                 
-                // Hide all interactive features first
-                document.querySelectorAll('.interactive-feature').forEach(feature => {
-                    feature.classList.remove('active');
+                // Hide all panels first
+                document.querySelectorAll('.feature-panel').forEach(panel => {
+                    panel.classList.remove('active');
                 });
                 
-                // Show the specific interactive feature
+                // Show the specific feature panel
                 if (feature) {
-                    document.getElementById(`${feature}Feature`).classList.add('active');
+                    document.getElementById(`${feature}Panel`).classList.add('active');
                     
                     // Scroll to the feature
-                    document.getElementById(`${feature}Feature`).scrollIntoView({
+                    document.getElementById(`${feature}Panel`).scrollIntoView({
                         behavior: 'smooth'
                     });
-                } else {
-                    const title = this.querySelector('h3').textContent;
-                    alert(`Feature "${title}" activated! In the full version, this would open the management screen.`);
                 }
             });
         });
         
-        // Medication Tracking
-        document.getElementById('saveMedication').addEventListener('click', function() {
-            const medName = document.getElementById('medicationName').value;
-            const dosage = document.getElementById('dosage').value;
-            const frequency = document.getElementById('frequency').value;
-            const nextDose = document.getElementById('nextDose').value;
-            
-            if (medName && dosage && nextDose) {
-                alert(`Medication "${medName}" (${dosage}) scheduled for ${nextDose} (${frequency})`);
-                
-                // Update the demo UI
-                document.getElementById('doseCount').textContent = '3 doses today';
-                document.getElementById('medProgress').style.width = '85%';
-                
-                // Close the form
-                document.getElementById('medicationFeature').classList.remove('active');
-            } else {
-                alert('Please fill all fields');
-            }
-        });
-        
-        // Hydration Tracking
-        document.getElementById('saveHydration').addEventListener('click', function() {
-            const waterIntake = parseInt(document.getElementById('waterIntake').value) || 0;
-            const dailyGoal = parseInt(document.getElementById('dailyGoal').value) || 1500;
-            
-            if (waterIntake > 0) {
-                const progress = Math.min(100, (waterIntake / dailyGoal) * 100);
-                const litersIntake = (waterIntake / 1000).toFixed(1);
-                const litersGoal = (dailyGoal / 1000).toFixed(1);
-                
-                document.getElementById('hydrationProgressBar').style.width = `${progress}%`;
-                document.getElementById('hydrationStatus').textContent = `${litersIntake}L / ${litersGoal}L`;
-                
-                // Update the demo UI
-                document.getElementById('waterAmount').textContent = `${litersIntake}L / ${litersGoal}L`;
-                document.getElementById('waterProgress').style.width = `${progress}%`;
-                
-                // Close the form
-                document.getElementById('hydrationFeature').classList.remove('active');
-            } else {
-                alert('Please enter a valid water intake amount');
-            }
-        });
-        
-        // Demo UI Interactions
-        document.getElementById('medicationDemo').addEventListener('click', function() {
-            document.querySelector('[data-feature="medication"]').click();
-        });
-        
-        document.getElementById('hydrationDemo').addEventListener('click', function() {
-            document.querySelector('[data-feature="hydration"]').click();
-        });
-        
-        // Pricing Plan Selection
-        document.querySelectorAll('.pricing-card .cta-button').forEach(button => {
+        // Close panel buttons
+        document.querySelectorAll('.close-panel').forEach(button => {
             button.addEventListener('click', function() {
-                if (this.textContent.includes('PRO')) {
-                    alert('Congratulations! You purchased the Pro version for $10/month. All features are now unlocked!');
-                    
-                    // Enable all features
-                    document.querySelectorAll('.feature-action').forEach(action => {
-                        action.style.background = 'var(--success)';
-                    });
-                } else {
-                    alert('Starting with Free Plan. Upgrade to Pro version for access to all features!');
-                }
+                this.closest('.feature-panel').classList.remove('active');
             });
         });
         
-        // Free Training Button
-        document.querySelector('.training .cta-button').addEventListener('click', function(e) {
-            e.preventDefault();
-            alert('Redirecting to free dog training page. In a real application, this would open: https://tinyurl.com/dogtrainingfreee');
-            window.location.href = 'https://tinyurl.com/dogtrainingfreee';
+        // Symptom Checker Logic
+        document.querySelectorAll('.symptom-item').forEach(item => {
+            item.addEventListener('click', function() {
+                this.classList.toggle('selected');
+            });
         });
         
-        // Simulate PWA installation prompt
-        window.addEventListener('beforeinstallprompt', (e) => {
-            // Prevent the mini-infobar from appearing on mobile
-            e.preventDefault();
-            // Stash the event so it can be triggered later
-            window.deferredPrompt = e;
-            // Show the install button
-            document.getElementById('installButton').style.display = 'flex';
+        document.getElementById('analyzeSymptoms').addEventListener('click', function() {
+            const selectedSymptoms = document.querySelectorAll('.symptom-item.selected');
+            const duration = document.getElementById('symptomDuration').value;
+            
+            if (selectedSymptoms.length === 0) {
+                alert('Please select at least one symptom');
+                return;
+            }
+            
+            if (!duration) {
+                alert('Please select symptom duration');
+                return;
+            }
+            
+            const symptomList = Array.from(selectedSymptoms).map(item => item.textContent).join(', ');
+            
+            // Simple diagnostic logic (in a real app this would be more complex)
+            let diagnosis = "Your pet may be experiencing a mild condition.";
+            let recommendations = "<ul>";
+            
+            if (selectedSymptoms.length > 3) {
+                diagnosis = "Your pet may have a serious condition that requires veterinary attention.";
+                recommendations += "<li>Contact your veterinarian immediately</li>";
+                recommendations += "<li>Monitor your pet closely for any changes</li>";
+            } else {
+                diagnosis = "Your pet may have a mild condition that could be monitored.";
+                recommendations += "<li>Ensure your pet stays hydrated</li>";
+                recommendations += "<li>Monitor for any worsening symptoms</li>";
+                recommendations += "<li>Contact your vet if symptoms persist for more than 24 hours</li>";
+            }
+            
+            if (symptomList.includes('Lethargy') && symptomList.includes('Loss of Appetite')) {
+                diagnosis = "Your pet may be experiencing a systemic illness.";
+                recommendations += "<li>Schedule a vet appointment within 24 hours</li>";
+            }
+            
+            if (symptomList.includes('Vomiting') && symptomList.includes('Diarrhea')) {
+                diagnosis = "Your pet may have gastrointestinal distress.";
+                recommendations += "<li>Withhold food for 12 hours</li>";
+                recommendations += "<li>Provide small amounts of water frequently</li>";
+            }
+            
+            recommendations += "</ul>";
+            
+            document.getElementById('diagnosisText').textContent = diagnosis;
+            document.getElementById('recommendations').innerHTML = "<h4>Recommendations:</h4>" + recommendations;
+            document.getElementById('symptomResult').style.display = 'block';
+        });
+        
+        document.getElementById('saveAnalysis').addEventListener('click', function() {
+            alert('Symptom analysis saved to health history!');
+            document.getElementById('symptomResult').style.display = 'none';
+            document.querySelectorAll('.symptom-item.selected').forEach(item => {
+                item.classList.remove('selected');
+            });
+            document.getElementById('symptomDuration').value = '';
+        });
+        
+        // Vet Locator Logic
+        document.getElementById('findVets').addEventListener('click', function() {
+            const location = document.getElementById('locationInput').value || 'New York, NY';
+            document.getElementById('locationDisplay').textContent = location;
+            
+            // Simulate loading vets
+            this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Searching...';
+            setTimeout(() => {
+                this.innerHTML = 'Find Nearby Vets';
+                alert(`Found 5 veterinary clinics near ${location}`);
+            }, 1500);
+        });
+        
+        // Vaccination Tracker Logic
+        document.getElementById('saveVaccination').addEventListener('click', function() {
+            const vaccine = document.getElementById('vaccineName').value;
+            const date = document.getElementById('vaccineDate').value;
+            const nextDue = document.getElementById('nextDue').value;
+            const vet = document.getElementById('vetName').value;
+            
+            if (!vaccine || !date || !nextDue || !vet) {
+                alert('Please fill all fields');
+                return;
+            }
+            
+            const vaccineName = document.querySelector(`#vaccineName option[value="${vaccine}"]`).text;
+            alert(`Vaccination record saved for ${vaccineName} administered on ${date} by ${vet}. Next due: ${nextDue}`);
+            
+            // Reset form
+            document.getElementById('vaccineName').value = '';
+            document.getElementById('vaccineDate').value = '';
+            document.getElementById('nextDue').value = '';
+            document.getElementById('vetName').value = '';
+        });
+        
+        // Health History Logic
+        document.getElementById('saveEvent').addEventListener('click', function() {
+            const date = document.getElementById('eventDate').value;
+            const type = document.getElementById('eventType').value;
+            const description = document.getElementById('eventDescription').value;
+            
+            if (!date || !type || !description) {
+                alert('Please fill all fields');
+                return;
+            }
+            
+            const typeText = document.querySelector(`#eventType option[value="${type}"]`).text;
+            alert(`Health event saved: ${typeText} on ${date}`);
+            
+            // Reset form
+            document.getElementById('eventDate').value = '';
+            document.getElementById('eventType').value = '';
+            document.getElementById('eventDescription').value = '';
         });
         
         // Initialize demo values
@@ -1400,6 +1717,16 @@
                 document.getElementById('waterProgress').style.width = `${progress}%`;
             }
         }, 5000);
+        
+        // Set today's date as default in forms
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('vaccineDate').value = today;
+        document.getElementById('eventDate').value = today;
+        
+        // Set next due date to 1 year from now
+        const nextYear = new Date();
+        nextYear.setFullYear(nextYear.getFullYear() + 1);
+        document.getElementById('nextDue').value = nextYear.toISOString().split('T')[0];
     </script>
 </body>
 </html>
